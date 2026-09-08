@@ -86,6 +86,11 @@ RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 # The rule that matters: serve <route>.php for the clean URL, without
 # redirecting. No !-d guard, because /services and /techniques are real
 # directories that still have to resolve to services.php and techniques.php.
+# Route nested pages explicitly first. OpenLiteSpeed can leave
+# REQUEST_FILENAME unresolved below a real directory, which makes the generic
+# -f check miss files such as services/gi-thoracic.php.
+RewriteRule ^(services|techniques)/([^/]+)/?$ $1/$2.php [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+?)/?$ $1.php [L]

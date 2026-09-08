@@ -74,6 +74,12 @@ RewriteRule ^(header|footer|header-include|icons|router)/?$ /404.php [L]
 # The rule that matters: serve <route>.php for the clean URL, without
 # redirecting, so /contact stays /contact in the address bar.
 #
+# Handle pages below the real services and techniques directories first. On
+# OpenLiteSpeed, REQUEST_FILENAME can still be unresolved while a request is
+# being rewritten below an existing directory, so the generic -f check below
+# may never see services/foo.php even when that file exists.
+RewriteRule ^(services|techniques)/([^/]+)/?$ $1/$2.php [L]
+
 # There is deliberately no !-d guard: /services and /techniques are real
 # directories that still have to resolve to services.php and techniques.php.
 # %{REQUEST_FILENAME} is the path the server already worked out for this
