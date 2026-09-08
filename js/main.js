@@ -13,7 +13,7 @@
   var WHATSAPP_MESSAGE =
     'Hello Dr. Dharanikota, I would like to schedule a consultation for cancer treatment. Please let me know your availability.';
   var CLINIC_MAP_QUERY =
-    'Arete Hospitals, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli, Hyderabad, Telangana 500032';
+    'Seven Hills Real Estate, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli, Hyderabad, Telangana 500032';
 
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }

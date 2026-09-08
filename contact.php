@@ -8,7 +8,7 @@ $og_description = 'Consultations at Arete Hospitals, OP Room No. 17, B-Wing, Gac
 $schema = <<<'SCHEMA'
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dranveshdharanikota.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://dranveshdharanikota.com/contact"}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","@id":"https://dranveshdharanikota.com/contact#webpage","url":"https://dranveshdharanikota.com/contact","name":"Contact & Book Appointment","headline":"Contact & Book Appointment","description":"Schedule your consultation with Dr. Anvesh Dharanikota for expert cancer care and surgical oncology treatment.","inLanguage":"en-IN","isPartOf":{"@type":"WebSite","@id":"https://dranveshdharanikota.com/#website","name":"Dr. Anvesh Dharanikota","url":"https://dranveshdharanikota.com/"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://dranveshdharanikota.com/photos/anvesh.webp"},"about":{"@id":"https://dranveshdharanikota.com/#physician"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dranveshdharanikota.com/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://dranveshdharanikota.com/contact"}]}}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://dranveshdharanikota.com/#physician","name":"Dr. Anvesh Dharanikota","url":"https://dranveshdharanikota.com/","image":"https://dranveshdharanikota.com/photos/anvesh.webp","description":"Senior Consultant Surgical Oncologist and Head of Department, laparoscopic and robotic surgeon with over 12 years of expertise in minimally invasive oncological procedures.","medicalSpecialty":"Oncologic","telephone":"+91 9440233339","email":"dr.anveshdharanikota@gmail.com","address":{"@type":"PostalAddress","name":"Arete Hospitals","streetAddress":"OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500032","addressCountry":"IN"},"hospitalAffiliation":{"@type":"Hospital","name":"Arete Hospitals","address":{"@type":"PostalAddress","streetAddress":"OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500032","addressCountry":"IN"}},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"17:00"}],"contactPoint":[{"@type":"ContactPoint","contactType":"appointments","telephone":"+91 9440233339","email":"dr.anveshdharanikota@gmail.com","areaServed":"IN","availableLanguage":"en"},{"@type":"ContactPoint","contactType":"emergency","telephone":"+91 9440233339","areaServed":"IN","availableLanguage":"en"}],"availableService":[{"@type":"MedicalProcedure","name":"Breast Oncoplastic Surgery","url":"https://dranveshdharanikota.com/services/breast-oncoplastic"},{"@type":"MedicalProcedure","name":"GI & Thoracic Oncology","url":"https://dranveshdharanikota.com/services/gi-thoracic"},{"@type":"MedicalProcedure","name":"Gynecologic Oncology","url":"https://dranveshdharanikota.com/services/gynecologic-oncology"},{"@type":"MedicalProcedure","name":"Robotic Surgery","url":"https://dranveshdharanikota.com/techniques/robotic-surgery"},{"@type":"MedicalProcedure","name":"CRS & HIPEC","url":"https://dranveshdharanikota.com/techniques/crs-hipec"}],"sameAs":["https://in.linkedin.com/in/dranveshdharanikotacancerspecialist","https://www.researchgate.net/profile/Anvesh-Dharanikota","https://orcid.org/0000-0001-7404-3239"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://dranveshdharanikota.com/#physician","name":"Dr. Anvesh Dharanikota","url":"https://dranveshdharanikota.com/","image":"https://dranveshdharanikota.com/photos/anvesh.webp","description":"Senior Consultant Surgical Oncologist and Head of Department, laparoscopic and robotic surgeon with over 12 years of expertise in minimally invasive oncological procedures.","medicalSpecialty":"Oncologic","telephone":"+91 9440233339","email":"dr.anveshdharanikota@gmail.com","address":{"@type":"PostalAddress","name":"Seven Hills Real Estate","streetAddress":"Seven Hills Real Estate, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500032","addressCountry":"IN"},"hospitalAffiliation":{"@type":"Hospital","name":"Arete Hospitals","address":{"@type":"PostalAddress","streetAddress":"Seven Hills Real Estate, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli","addressLocality":"Hyderabad","addressRegion":"Telangana","postalCode":"500032","addressCountry":"IN"}},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"17:00"}],"contactPoint":[{"@type":"ContactPoint","contactType":"appointments","telephone":"+91 9440233339","email":"dr.anveshdharanikota@gmail.com","areaServed":"IN","availableLanguage":"en"},{"@type":"ContactPoint","contactType":"emergency","telephone":"+91 9440233339","areaServed":"IN","availableLanguage":"en"}],"availableService":[{"@type":"MedicalProcedure","name":"Breast Oncoplastic Surgery","url":"https://dranveshdharanikota.com/services/breast-oncoplastic"},{"@type":"MedicalProcedure","name":"GI & Thoracic Oncology","url":"https://dranveshdharanikota.com/services/gi-thoracic"},{"@type":"MedicalProcedure","name":"Gynecologic Oncology","url":"https://dranveshdharanikota.com/services/gynecologic-oncology"},{"@type":"MedicalProcedure","name":"Robotic Surgery","url":"https://dranveshdharanikota.com/techniques/robotic-surgery"},{"@type":"MedicalProcedure","name":"CRS & HIPEC","url":"https://dranveshdharanikota.com/techniques/crs-hipec"}],"sameAs":["https://in.linkedin.com/in/dranveshdharanikotacancerspecialist","https://www.researchgate.net/profile/Anvesh-Dharanikota","https://orcid.org/0000-0001-7404-3239"]}</script>
 SCHEMA;
 
 require __DIR__ . '/header.php';
@@ -52,7 +52,7 @@ require __DIR__ . '/header.php';
                     </div>
                     <h3 class="subheading">Clinic Address</h3>
                     <div class="contact-book-appointment__stack">
-                      <p class="small-text">Arete Hospitals</p>
+                      <p class="small-text">Seven Hills Real Estate</p>
                       <p class="small-text">OP Room No. 17, B-Wing, Ground Floor</p>
                       <p class="small-text">CHR Lane, Rd Number 1, Colony</p>
                       <p class="small-text">Gachibowli, Hyderabad</p>
@@ -154,21 +154,23 @@ require __DIR__ . '/header.php';
                   </div>
                 </div>
                 <div class="stack-6" data-reveal>
-                  <div class="book-appointment__row">
-                    <div class="centred">
-                      <svg class="icon-18" aria-hidden="true"><use href="#i-map-pin"></use></svg>
-                      <h3 class="subheading-7">Interactive Map</h3>
-                      <p class="text-10">Click to view detailed location and directions</p>
-                    </div>
-                    <div class="card-10">
-                      <div class="inline-row inline-row--default">
-                        <div class="book-appointment__icon-tile">
-                          <svg class="icon icon--md icon--on-dark" aria-hidden="true"><use href="#i-map-pin"></use></svg>
-                        </div>
-                        <div>
-                          <h4 class="book-appointment__subheading-3">Arete Hospitals</h4>
-                          <p class="small-text">Gachibowli, Hyderabad</p>
-                        </div>
+                  <div class="book-appointment__row book-appointment__row--map">
+                    <iframe
+                      class="clinic-map__frame"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.490360756073!2d78.3673979!3d17.4362288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93b305344bcb%3A0xa26d34c0138b6553!2sDr.%20Anvesh%20Dharanikota%3A%20Surgical%20Oncologist%20in%20Hyderabad%20%7C%20Breast%20Cancer%2C%20Lung%20Cancer%2C%20Top%20Cancer%20Specialist-%20Arete%20Hospitals!5e0!3m2!1sen!2sin!4v1788863769471!5m2!1sen!2sin"
+                      title="Map showing Dr. Anvesh Dharanikota's clinic at Arete Hospitals, Gachibowli, Hyderabad"
+                      allowfullscreen
+                      loading="lazy"
+                      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                  </div>
+                  <div class="card-10 clinic-map__card">
+                    <div class="inline-row inline-row--default">
+                      <div class="book-appointment__icon-tile">
+                        <svg class="icon icon--md icon--on-dark" aria-hidden="true"><use href="#i-map-pin"></use></svg>
+                      </div>
+                      <div>
+                        <h4 class="book-appointment__subheading-3">Arete Hospitals</h4>
+                        <p class="small-text">Gachibowli, Hyderabad</p>
                       </div>
                     </div>
                   </div>

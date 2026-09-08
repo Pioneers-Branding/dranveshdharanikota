@@ -1,6 +1,12 @@
-# Netlify configuration. Netlify serves <route>.html at /route and redirects
-# /route.html to /route by default, so the URL policy matches the Apache setup
-# with nothing to configure here.
+# NO LONGER IN USE. Kept only so nothing is lost if the site ever goes back to
+# plain HTML.
+#
+# The site is PHP now, and Netlify does not run PHP: it serves static files
+# only. Deploying this folder there would hand visitors the raw source of every
+# page. The site needs a host that runs PHP, which every ordinary shared host
+# does, Hostinger included. Server rules live in .htaccess.
+#
+# The headers below are what Netlify would have applied.
 [build]
   publish = "."
 

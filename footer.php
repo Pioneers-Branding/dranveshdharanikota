@@ -26,7 +26,7 @@
                 </a>
                 <div class="media-row">
                   <svg class="footer__icon" aria-hidden="true"><use href="#i-map-pin"></use></svg>
-                  <span class="footer__label">Arete Hospitals, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli, Hyderabad, Telangana - 500032</span>
+                  <span class="footer__label">Seven Hills Real Estate, OP Room No. 17, B-Wing, Ground Floor, CHR Lane, Rd Number 1, Colony, Gachibowli, Hyderabad, Telangana - 500032</span>
                 </div>
                 <div class="media-row">
                   <svg class="footer__icon" aria-hidden="true"><use href="#i-clock"></use></svg>

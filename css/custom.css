@@ -10,6 +10,36 @@
  *
  *   .site-footer { background: #4a0306; }
  *
- * The file is intentionally empty. Anything you add appears on every page,
- * because header.php loads it on every page.
+ * Anything you add appears on every page, because header.php loads it on
+ * every page.
  */
+
+/* Google Maps embed -------------------------------------------------------
+ *
+ * Used by the "Visit Our Clinic" panel on the home page and the matching
+ * panel on the contact page. Both panels held a decorative placeholder that
+ * read "Interactive Map"; the iframe now fills the panel instead, so the
+ * gradient background and the flex centring those panels used are switched
+ * off here rather than edited out of style.css.
+ *
+ * The white card naming the hospital used to float over the bottom of the
+ * panel. Google's embed terms require its logo and attribution, both bottom
+ * corners of the map, to stay visible, so the card sits below the map now.
+ */
+.visit-clinic__block--map,
+.book-appointment__row--map {
+  display: block;
+  background-image: none;
+}
+
+.clinic-map__frame {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
+
+.card-10.clinic-map__card {
+  position: static;
+  margin-top: 1rem;
+}

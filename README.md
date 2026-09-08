@@ -1,71 +1,123 @@
 # Dr. Anvesh Dharanikota — website
 
-Plain HTML, CSS and JavaScript. No framework, no build step, no Node, no
+PHP, CSS and JavaScript. No framework, no build step, no Node, no database, no
 dependencies. Edit a file, save it, upload it.
+
+The PHP does one job: the parts every page shares — the `<head>`, the site
+header and menu, the footer — live in one file each instead of being copied
+into all thirty pages. Change the phone number in `footer.php` and it changes
+everywhere. Nothing else about the site is dynamic.
 
 Converted from the React (Vite) single-page application that ran at
 dranveshdharanikota.com. Design, copy, imagery, URLs and behaviour are
 unchanged; only the implementation changed.
 
-## Editing it
+## The shared files
 
-Every page is a normal HTML file you can open and read. Markup is indented, one
-element per line, with class names that say what the thing is:
+| File | What it holds |
+| --- | --- |
+| `header.php` | The `<head>`, the icon sprite, the logo, the menu |
+| `footer.php` | The footer, the floating chat button, the closing tags |
+| `header-include.php` | Empty. Where tracking and verification codes go |
+| `icons.php` | Every line icon the site uses |
+| `css/custom.css` | Empty. Where your own CSS goes |
 
-```html
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Understanding GI &amp; Thoracic Cancers</h2>
-    <p class="lede">Gastrointestinal (GI) and thoracic oncology focuses on …</p>
-  </div>
-</section>
+**To add Google Analytics, Google Tag Manager, a Search Console verification
+tag or a Meta Pixel**, paste the snippet into `header-include.php` and save.
+It appears on every page. Nothing else needs touching.
+
+## Editing a page
+
+Every page is one file, and it looks like this:
+
+```php
+<?php
+$route       = '/about';
+$title       = 'About Dr. Anvesh Dharanikota | Surgical Oncologist, Hyderabad';
+$description = 'One sentence, used by Google and by link previews.';
+
+require __DIR__ . '/header.php';
+?>
+        <div class="page page--default">
+          <h1 class="page-title">About Dr. Anvesh</h1>
+          ...
+        </div>
+<?php require __DIR__ . '/footer.php';
 ```
 
-To change wording, edit the text. To change a colour or spacing, find the class
-in `css/style.css` and edit the rule there. Nothing is generated at request
-time and nothing needs compiling.
+The settings at the top, then the page's own markup, then the footer line. The
+markup in the middle is ordinary HTML: indented, one element per line, with
+class names that say what the thing is. To change wording, edit the text.
+
+Write titles and descriptions as plain text, with a real `&` rather than
+`&amp;`. They are escaped on the way out.
+
+`$route` is the page's address. It sets the canonical URL and tells the menu
+which item to highlight, so it must match the file name: `services/hpb.php`
+uses `'/services/hpb'`.
+
+Optional settings, each with a sensible default:
+
+| Variable | Default | Use it when |
+| --- | --- | --- |
+| `$og_title`, `$og_description` | the page title and description | the link preview should read differently |
+| `$og_image` | `photos/anvesh.webp` | the page has its own preview image |
+| `$og_type` | `article` | the homepage, which uses `website` |
+| `$robots` | `index,follow` | hiding a page, with `noindex,follow` |
+| `$schema` | none | the page carries Schema.org JSON-LD |
+| `$show_chat` | `true` | hiding the chat button, as `404.php` does |
+
+## Adding a page
+
+Copy the closest existing page, change the settings at the top and replace the
+markup. Then add it to `sitemap.xml`, and to the menu in `header.php` if it
+belongs there. A new menu item highlights itself automatically.
 
 ## Running it locally
 
-With Python installed:
+PHP includes a web server, so nothing needs installing beyond PHP itself:
 
 ```
-python serve.py
+php -S localhost:8000 router.php
 ```
 
 Then open http://localhost:8000.
 
-`serve.py` is a development convenience, not part of the site. It exists
-because `python -m http.server` has no `.html` fallback, so `/about` would 404
-there even though `about.html` is sitting next to it. The script adds the same
-rule the production hosts already apply, and serves `404.html` for a miss.
-Nothing on the server needs it.
+`router.php` is a development convenience, not part of the site. The built-in
+server has no `.htaccess`, so on its own it would 404 on `/about` even though
+`about.php` is sitting right there. The router applies the one rule the real
+host applies, and serves `404.php` for a miss. Nothing on the server uses it.
 
-Opening the files directly with `file://` will not work, because links and
-assets are written from the site root.
+Opening the files directly with `file://` will not work. PHP files must be run
+by a server, and links and assets are written from the site root.
 
 ## URL policy
 
 Every page keeps the exact address it had on the React site: no trailing slash
-and no `.html` suffix. Each page is one file named after its route, and the
-server maps the clean URL onto that file.
+and no file extension. Each page is one `.php` file named after its route, and
+the server maps the clean URL onto that file.
 
-`/services/gi-thoracic` → `services/gi-thoracic.html` → responds 200
+`/services/gi-thoracic` → `services/gi-thoracic.php` → responds 200
 
 `.htaccess` (Apache or LiteSpeed, which is what Hostinger runs) sets
-`DirectorySlash Off` and rewrites internally, so the clean URL never redirects.
-`netlify.toml` covers Netlify, which behaves this way by default. For Nginx:
+`DirectorySlash Off` and rewrites internally, so the clean URL never
+redirects. It also 301s the addresses this site used before it was PHP, so old
+links still land correctly. For Nginx:
 
 ```nginx
 location / {
-  try_files $uri $uri.html =404;
+  try_files $uri $uri.php =404;
 }
-error_page 404 /404.html;
+error_page 404 /404.php;
 ```
 
 Links in the markup are written as the clean URL, root-absolute, exactly as a
 visitor sees it: `<a href="/services/gi-thoracic">`. Renaming a page means
-renaming one file and updating the links that point at it.
+renaming one file, updating its `$route`, and updating the links to it.
+
+**The host must run PHP.** Any ordinary shared host does. Netlify does not, so
+`netlify.toml` no longer applies; it is kept only in case the site ever goes
+back to plain HTML.
 
 ## Layout
 
@@ -73,29 +125,35 @@ One page, one file. No folder is created just to hold a single page.
 
 ```
 /
-├── index.html                  homepage
-├── about.html  awards.html  contact.html  faqs.html  gallery.html
-├── media.html  publications.html  resources.html  testimonials.html
-├── thank-you.html  videos.html
-├── services.html               hub for the 11 service pages
-├── techniques.html             hub for the 4 technique pages
-├── 404.html  robots.txt  sitemap.xml
+├── index.php                   homepage
+├── about.php  awards.php  contact.php  faqs.php  gallery.php
+├── media.php  publications.php  resources.php  testimonials.php
+├── thank-you.php  videos.php
+├── services.php                hub for the 11 service pages
+├── techniques.php              hub for the 4 technique pages
+├── 404.php  robots.txt  sitemap.xml
+│
+├── header.php                  shared: head, menu, icon sprite
+├── footer.php                  shared: footer, chat button
+├── header-include.php          shared: your tracking codes
+├── icons.php                   shared: the icon sprite
+│
 ├── .htaccess                   Apache / LiteSpeed
-├── netlify.toml                Netlify
-├── serve.py                    local preview only, not uploaded
+├── netlify.toml                no longer in use, see above
+├── router.php                  local preview only
 ├── services/                   11 pages, one file each
 ├── techniques/                 4 pages, one file each
-├── css/style.css
+├── css/style.css  css/custom.css
 ├── js/main.js
 └── photos/                     49 images
 ```
 
 `services/` and `techniques/` exist only because the pages inside them sit one
-level down in the URL: `/services/hpb` is `services/hpb.html`.
+level down in the URL: `/services/hpb` is `services/hpb.php`.
 
-Upload the whole folder. `serve.py` and `README.md` are the only files the site
-does not use; leaving them in place does no harm, since a static host serves
-them and nothing links to either.
+Upload the whole folder. `router.php` and `README.md` are the only files the
+live site does not use. `.htaccess` denies direct requests for the shared
+includes, so `/header.php` returns 403 rather than a stray fragment of markup.
 
 ## The stylesheet
 
@@ -124,18 +182,25 @@ rewrites a `class` attribute wholesale, so markup and styling stay separable.
 
 ## Icons
 
-The site uses 50 line icons. Rather than repeating the path data at each of the
-1,321 places an icon appears, each page carries one hidden sprite and every icon
+The site uses 51 line icons. Rather than repeating the path data at each of the
+1,321 places an icon appears, every page carries one hidden sprite and each icon
 references it:
 
 ```html
 <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
 ```
 
-The sprite sits just inside `.app-container` at the top of each page. To add an
-icon, add a `<symbol>` to that sprite and reference it the same way. Size and
-colour come from the class: `.icon`, `.icon--sm`, `.icon--lg`, `.icon--accent`,
-`.icon--on-dark`.
+The sprite lives in `icons.php`, which `header.php` prints just inside
+`.app-container` on every page. To add an icon, paste one more `<symbol>` into
+that file and reference it the same way. Size and colour come from the class:
+`.icon`, `.icon--sm`, `.icon--lg`, `.icon--accent`, `.icon--on-dark`.
+
+Every page carries the whole sprite rather than only the icons visible in its
+markup. That is deliberate: `js/main.js` swaps some icons in at runtime, so a
+trimmed sprite would leave those references pointing at nothing. The FAQ
+accordion is the clearest case — it trades `i-plus` for `i-minus` on click, and
+`i-minus` appears nowhere in the markup. The cost is about 1.8KB per page once
+the server gzips it.
 
 ## The script
 
