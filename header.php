@@ -50,6 +50,21 @@ $show_chat = $show_chat ?? true;
 $canonical = $site_url . $route;
 
 /**
+ * A stylesheet or script URL with the file's modification time appended.
+ *
+ * .htaccess tells browsers to keep CSS and JS for a year and marks them
+ * immutable, which is right for speed but means an edit would otherwise not
+ * reach anyone who had already loaded the site. Changing the file changes the
+ * URL, so the new version is fetched at once and an unchanged one still comes
+ * from cache. Nothing needs doing by hand after an edit.
+ */
+function asset($path)
+{
+    $file = __DIR__ . $path;
+    return is_file($file) ? $path . '?v=' . filemtime($file) : $path;
+}
+
+/**
  * Mark the link to the current page in the navigation.
  *
  * The menu below is written as plain HTML, with no PHP mixed into it, so it
@@ -123,8 +138,8 @@ function e($value)
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="<?= e(asset('/css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('/css/custom.css')) ?>">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     <script>document.documentElement.className+=" js";</script>
 <?php if ($schema !== '') { echo $schema, "\n"; } ?>

@@ -25,16 +25,36 @@
  * The white card naming the hospital used to float over the bottom of the
  * panel. Google's embed terms require its logo and attribution, both bottom
  * corners of the map, to stay visible, so the card sits below the map now.
+ *
+ * The map fills its whole panel. On the home page that means the full height
+ * of the column beside the contact details, so the two sides of the section
+ * finish level; the flex column below is what lets the map take whatever
+ * height the text column ends up being. The min-height is the floor for
+ * narrow screens, where the two columns stack.
  */
+.visit-clinic__map-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .visit-clinic__block--map,
 .book-appointment__row--map {
-  display: block;
+  display: flex;
+  height: auto;
+  min-height: 420px;
   background-image: none;
 }
 
+.visit-clinic__block--map {
+  flex: 1 1 auto;
+}
+
+/* A flex child stretches to the container's height by default, which is how
+ * the iframe fills a panel whose height comes from flex-grow rather than from
+ * a height property. A percentage height would collapse there. */
 .clinic-map__frame {
-  display: block;
-  height: 100%;
+  flex: 1 1 auto;
   width: 100%;
   border: 0;
 }

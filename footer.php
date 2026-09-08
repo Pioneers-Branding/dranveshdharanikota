@@ -124,6 +124,6 @@
       </div>
 <?php endif; ?>
     </div>
-    <script src="/js/main.js" defer></script>
+    <script src="<?= e(asset('/js/main.js')) ?>" defer></script>
   </body>
 </html>

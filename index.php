@@ -817,7 +817,7 @@ require __DIR__ . '/header.php';
                     </button>
                   </div>
                 </div>
-                <div class="relative-box" data-reveal>
+                <div class="relative-box visit-clinic__map-panel" data-reveal>
                   <div class="visit-clinic__block visit-clinic__block--map">
                     <iframe
                       class="clinic-map__frame"
