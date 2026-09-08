@@ -1,0 +1,15 @@
+/* Your own CSS.
+ *
+ * style.css is the site's full stylesheet, 150KB of it, and it is the file to
+ * edit when you want to change how an existing component looks. This file is
+ * for additions and overrides you want kept apart from it: a colour tweak, a
+ * one-off rule for a new section, a temporary change you may want to undo.
+ *
+ * It loads after style.css, so a rule here beats the same rule there without
+ * needing !important, as long as the selector is at least as specific.
+ *
+ *   .site-footer { background: #4a0306; }
+ *
+ * The file is intentionally empty. Anything you add appears on every page,
+ * because header.php loads it on every page.
+ */

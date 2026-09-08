@@ -1,12 +1,14 @@
-# Dr. Anvesh Dharanikota - static site server configuration (Apache / LiteSpeed)
+# Dr. Anvesh Dharanikota - site server configuration (Apache / LiteSpeed)
 #
 # URL policy: every page keeps the exact address it had on the React site, with
-# no trailing slash and no .html suffix. Each page is one file named after its
-# route, and that file is served internally, so /services/gi-thoracic answers
-# 200 from services/gi-thoracic.html rather than redirecting anywhere.
+# no trailing slash and no file extension. Each page is one .php file named
+# after its route, and that file is served internally, so /services/gi-thoracic
+# answers 200 from services/gi-thoracic.php rather than redirecting anywhere.
+#
+# The host must run PHP. Any ordinary shared host does, Hostinger included.
 
 Options -Indexes
-DirectoryIndex index.html
+DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -29,35 +31,48 @@ DirectoryIndex index.html
   RewriteCond %{REQUEST_URI} !^/$
   RewriteRule ^(.*)/$ /$1 [R=301,L]
 
-  # /index.html -> /
-  #
-  # This and the two rules under it match on THE_REQUEST, the literal request
-  # line the browser sent, rather than on the current URI. In .htaccess context
-  # Apache re-runs this ruleset after the internal rewrite at the bottom, and
-  # matching the rewritten URI would bounce /path straight back forever.
+  # The four rules below match on THE_REQUEST, the literal request line the
+  # browser sent, rather than on the current URI. In .htaccess context Apache
+  # re-runs this ruleset after the internal rewrite at the bottom, and matching
+  # the rewritten URI would bounce /path straight back forever.
+
+  # /index.php -> /
+  RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+  RewriteRule ^index\.php$ / [R=301,L]
+
+  # /path.php -> /path
+  RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
+  RewriteRule ^(.+)\.php$ /$1 [R=301,L]
+
+  # Addresses this site used before it was PHP, kept so old links and anything
+  # still in Google's index land on the right page instead of a 404.
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
   RewriteRule ^index\.html$ / [R=301,L]
 
-  # /path/index.html -> /path. Kept because pages used to live at that address
-  # before each route became a single file; anything still linking there lands
-  # on the right page instead of a 404.
-  RewriteCond %{THE_REQUEST} \s/+(.+)/index\.html[\s?] [NC]
-  RewriteRule ^(.+)/index\.html$ /$1 [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
+  RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 
-  # /path.html -> /path. 404.html is exempt so ErrorDocument can serve it.
-  RewriteCond %{THE_REQUEST} \s/+(.+)\.html[\s?] [NC]
-  RewriteCond %{REQUEST_URI} !^/404\.html$
-  RewriteRule ^(.+)\.html$ /$1 [R=301,L]
-
-  # Serve <route>.html for the clean URL without redirecting.
+  # Serve <route>.php for the clean URL without redirecting.
   # The second condition keeps directories that hold no page of their own,
   # /css and /photos among them, from rewriting to a file that does not exist.
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^(.+?)/?$ /$1.html [L]
+  RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+  RewriteRule ^(.+?)/?$ /$1.php [L]
 </IfModule>
 
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
+
+# The shared includes are pulled in by the page files and are never a page of
+# their own. Refuse them if anyone asks for one directly.
+<FilesMatch "^(header|footer|header-include|icons|router)\.php$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
@@ -84,7 +99,7 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.(css|js|webp|png|jpg|jpeg|svg|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <FilesMatch "\.html$">
+  <FilesMatch "\.php$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
 </IfModule>
