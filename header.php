@@ -22,6 +22,14 @@
  * in header-include.php instead and leave this file alone.
  */
 
+// This file is an include, not a page. Refuse a direct request for it. The
+// check is here rather than only in .htaccess so that it still holds on a
+// server that ignores .htaccess.
+if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
+    http_response_code(403);
+    exit('Forbidden');
+}
+
 $site_url = 'https://dranveshdharanikota.com';
 
 // ---------------------------------------------------------------------------

@@ -1,0 +1,115 @@
+Rewrite rules for a server that ignores .htaccess
+=================================================
+
+Your server is LiteSpeed and the document root is /home/dranveshdharanikota.com
+/public_html, which is the folder layout CyberPanel uses. On CyberPanel the web
+server is usually OpenLiteSpeed, and OpenLiteSpeed does not read .htaccess
+unless it has been switched on. That is why every clean URL returns the
+LiteSpeed 404 page while /contact.php loads normally: the file is there and is
+correct, but nothing is reading it.
+
+There are two ways to fix it. Either one works. Do the first if you can.
+
+
+OPTION 1 - switch .htaccess back on (one setting, keeps .htaccess in charge)
+---------------------------------------------------------------------------
+
+  1. CyberPanel -> Websites -> List Websites -> dranveshdharanikota.com
+  2. Click "vHost Conf"
+  3. Find the rewrite block. Make it read exactly:
+
+         rewrite  {
+           enable                  1
+           autoLoadHtaccess        1
+         }
+
+     If there is no rewrite block, add that one.
+  4. Save, then restart LiteSpeed: CyberPanel -> Server Status -> "Restart
+     LiteSpeed", or over SSH: systemctl restart lsws
+  5. Open https://dranveshdharanikota.com/contact
+
+This is the better option. Everything in .htaccess starts working again,
+including the custom 404 page, the gzip settings and the cache headers, and
+future edits only have to be made in .htaccess.
+
+
+OPTION 2 - paste the rules into the panel instead
+-------------------------------------------------
+
+  1. CyberPanel -> Websites -> List Websites -> dranveshdharanikota.com
+  2. Click "Rewrite Rules"
+  3. Delete whatever is in the box and paste everything between the two
+     ==== lines below
+  4. Save, then open https://dranveshdharanikota.com/contact
+
+This only covers the URL rules. The custom 404 page needs the separate step at
+the bottom of this file.
+
+==== paste from here ====
+RewriteEngine On
+RewriteBase /
+
+# Canonical host: https, no www. Both conditions must fail before redirecting,
+# because on a server that terminates TLS at a proxy %{HTTPS} reads as off even
+# for an https request, and testing it alone would redirect forever.
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# /path/ -> /path
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# The rules that follow test THE_REQUEST, the literal request line the browser
+# sent, rather than the current address. The ruleset runs again after the
+# internal rewrite at the bottom, and testing the rewritten address would send
+# /contact back and forth forever.
+
+# /index.php -> /
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+# /path.php -> /path
+RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
+RewriteRule ^(.+)\.php$ /$1 [R=301,L]
+
+# Addresses this site used before it was PHP, so old links still land right.
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
+RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
+
+# The rule that matters: serve <route>.php for the clean URL, without
+# redirecting. No !-d guard, because /services and /techniques are real
+# directories that still have to resolve to services.php and techniques.php.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+==== paste to here ====
+
+
+The custom 404 page, if you used Option 2
+-----------------------------------------
+
+The rules above do not cover error pages, so a bad address would still show the
+LiteSpeed 404 rather than the site's own. In CyberPanel -> vHost Conf, add:
+
+    errorpage 404  {
+      url                     /404.php
+    }
+
+Save and restart LiteSpeed.
+
+
+How to tell it worked
+---------------------
+
+Open https://dranveshdharanikota.com/index.php. It should bounce to
+https://dranveshdharanikota.com/ and drop the index.php from the address bar.
+If it does, the rules are live and every clean URL will work.
+
+Then delete server-check.php from the server.

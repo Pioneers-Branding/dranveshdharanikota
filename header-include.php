@@ -29,4 +29,10 @@
  *     gtag('config', 'G-XXXXXXX');
  *   </script>
  */
+
+// This file is an include, not a page. Refuse a direct request for it.
+if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
+    http_response_code(403);
+    exit('Forbidden');
+}
 ?>

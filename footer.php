@@ -5,6 +5,12 @@
  *
  * Edit the markup here once to change the footer on every page.
  */
+
+// This file is an include, not a page. Refuse a direct request for it.
+if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
+    http_response_code(403);
+    exit('Forbidden');
+}
 ?>
       </main>
       <footer class="site-footer">

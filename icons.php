@@ -18,6 +18,12 @@
  * trades i-plus for i-minus), so a sprite trimmed to the icons visible in the
  * markup would leave those references pointing at nothing.
  */
+
+// This file is an include, not a page. Refuse a direct request for it.
+if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
+    http_response_code(403);
+    exit('Forbidden');
+}
 ?>
       <svg class="icon-sprite" aria-hidden="true" focusable="false">
         <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

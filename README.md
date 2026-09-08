@@ -121,32 +121,34 @@ back to plain HTML.
 
 ## If every page 404s except the homepage
 
-That one symptom has one cause: the server is not reading `.htaccess`, so the
-rule that maps `/about` onto `about.php` never runs. The homepage still works
-because the server serves `index.php` for `/` on its own.
+The rule that maps `/about` onto `about.php` is not running. The homepage still
+works because the server serves `index.php` for `/` on its own, without being
+told to. Two checks tell you which of the two causes it is:
 
-`.htaccess` starts with a dot, which makes it a hidden file. File Manager and
-most FTP clients skip hidden files unless you switch them on, so it is very
-easy to upload the whole site and leave this one file behind. Windows also
-tends to save it as `htaccess.txt`, which the server ignores.
+1. Open `/about.php`, with the extension. If the About page loads, every file
+   uploaded correctly. If it 404s too, the upload was incomplete.
+2. Open `/index.php`. If `.htaccess` is being applied it bounces to `/` and
+   drops the `index.php`. If it stays put, `.htaccess` is being ignored.
 
-Two checks, in order:
+**If `.htaccess` is simply missing**, remember it is a hidden file, so File
+Manager and most FTP clients skip it unless you switch hidden files on. Windows
+also tends to save it as `htaccess.txt`, which the server ignores. Check that
+it sits in the same folder as `index.php` and is named exactly `.htaccess`.
 
-1. Open `/index.php` in a browser. If `.htaccess` is working it redirects to
-   `/` and the address bar loses the `index.php`. If it stays put, `.htaccess`
-   is not being applied.
-2. Open `/about.php`, with the extension. If the About page loads, every file
-   uploaded correctly and only `.htaccess` is the problem. If it 404s too, the
-   upload itself was incomplete.
+**If `.htaccess` is present and still ignored**, the web server is not reading
+it. That is the situation this site is in. The host runs OpenLiteSpeed under
+CyberPanel, which does not read `.htaccess` unless it is switched on.
+`rewrite-rules.txt` in this folder has the fix, both the one setting that turns
+`.htaccess` back on and a paste-ready copy of the rules for the panel's own
+Rewrite Rules box.
 
-To fix it, open File Manager, go to the folder that holds `index.php`, switch
-hidden files on, and check that `.htaccess` is there and is named exactly that.
-Creating the file in File Manager and pasting the contents in works around the
-upload problem entirely.
+`server-check.php` reports all of this at once. Upload it, open
+`https://your-domain.com/server-check.php`, read it, then delete it from the
+server. It is a temporary tool and is not part of the site.
 
-`server-check.php` in this folder reports all of the above at once. Upload it,
-open `https://your-domain.com/server-check.php`, read it, then delete it from
-the server. It is a temporary tool and is not part of the site.
+The shared includes do not depend on any of this. `header.php`, `footer.php`,
+`icons.php` and `header-include.php` each refuse a direct request in PHP, so
+`/header.php` returns 403 whether or not `.htaccess` is being read.
 
 ## Layout
 
@@ -171,6 +173,7 @@ One page, one file. No folder is created just to hold a single page.
 ├── netlify.toml                no longer in use, see above
 ├── router.php                  local preview only
 ├── server-check.php            temporary diagnostic, delete after use
+├── rewrite-rules.txt           notes for the host, not uploaded
 ├── services/                   11 pages, one file each
 ├── techniques/                 4 pages, one file each
 ├── css/style.css  css/custom.css
