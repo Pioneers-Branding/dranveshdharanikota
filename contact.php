@@ -163,17 +163,6 @@ require __DIR__ . '/header.php';
                       loading="lazy"
                       referrerpolicy="strict-origin-when-cross-origin"></iframe>
                   </div>
-                  <div class="card-10 clinic-map__card">
-                    <div class="inline-row inline-row--default">
-                      <div class="book-appointment__icon-tile">
-                        <svg class="icon icon--md icon--on-dark" aria-hidden="true"><use href="#i-map-pin"></use></svg>
-                      </div>
-                      <div>
-                        <h4 class="book-appointment__subheading-3">Arete Hospitals</h4>
-                        <p class="small-text">Gachibowli, Hyderabad</p>
-                      </div>
-                    </div>
-                  </div>
                   <div class="book-appointment__header-2">
                     <h3 class="book-appointment__subheading-2">Emergency Contact</h3>
                     <p class="book-appointment__text">For urgent medical situations or emergency consultations, please call our 24/7 emergency line:</p>

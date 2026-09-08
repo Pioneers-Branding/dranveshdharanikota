@@ -827,17 +827,6 @@ require __DIR__ . '/header.php';
                       loading="lazy"
                       referrerpolicy="strict-origin-when-cross-origin"></iframe>
                   </div>
-                  <div class="card-10 clinic-map__card">
-                    <div class="inline-row inline-row--default">
-                      <div class="visit-clinic__icon-tile-4">
-                        <svg class="icon icon--on-dark" aria-hidden="true"><use href="#i-map-pin"></use></svg>
-                      </div>
-                      <div>
-                        <h5 class="strong-label">Arete Hospitals</h5>
-                        <p class="text">Gachibowli, Hyderabad</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

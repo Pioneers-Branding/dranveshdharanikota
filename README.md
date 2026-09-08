@@ -119,6 +119,35 @@ renaming one file, updating its `$route`, and updating the links to it.
 `netlify.toml` no longer applies; it is kept only in case the site ever goes
 back to plain HTML.
 
+## If every page 404s except the homepage
+
+That one symptom has one cause: the server is not reading `.htaccess`, so the
+rule that maps `/about` onto `about.php` never runs. The homepage still works
+because the server serves `index.php` for `/` on its own.
+
+`.htaccess` starts with a dot, which makes it a hidden file. File Manager and
+most FTP clients skip hidden files unless you switch them on, so it is very
+easy to upload the whole site and leave this one file behind. Windows also
+tends to save it as `htaccess.txt`, which the server ignores.
+
+Two checks, in order:
+
+1. Open `/index.php` in a browser. If `.htaccess` is working it redirects to
+   `/` and the address bar loses the `index.php`. If it stays put, `.htaccess`
+   is not being applied.
+2. Open `/about.php`, with the extension. If the About page loads, every file
+   uploaded correctly and only `.htaccess` is the problem. If it 404s too, the
+   upload itself was incomplete.
+
+To fix it, open File Manager, go to the folder that holds `index.php`, switch
+hidden files on, and check that `.htaccess` is there and is named exactly that.
+Creating the file in File Manager and pasting the contents in works around the
+upload problem entirely.
+
+`server-check.php` in this folder reports all of the above at once. Upload it,
+open `https://your-domain.com/server-check.php`, read it, then delete it from
+the server. It is a temporary tool and is not part of the site.
+
 ## Layout
 
 One page, one file. No folder is created just to hold a single page.
@@ -141,6 +170,7 @@ One page, one file. No folder is created just to hold a single page.
 ├── .htaccess                   Apache / LiteSpeed
 ├── netlify.toml                no longer in use, see above
 ├── router.php                  local preview only
+├── server-check.php            temporary diagnostic, delete after use
 ├── services/                   11 pages, one file each
 ├── techniques/                 4 pages, one file each
 ├── css/style.css  css/custom.css
@@ -151,9 +181,10 @@ One page, one file. No folder is created just to hold a single page.
 `services/` and `techniques/` exist only because the pages inside them sit one
 level down in the URL: `/services/hpb` is `services/hpb.php`.
 
-Upload the whole folder. `router.php` and `README.md` are the only files the
-live site does not use. `.htaccess` denies direct requests for the shared
-includes, so `/header.php` returns 403 rather than a stray fragment of markup.
+Upload the whole folder, `.htaccess` included. `router.php`, `server-check.php`
+and `README.md` are the only files the live site does not use. `.htaccess`
+denies direct requests for the shared includes, so `/header.php` returns 403
+rather than a stray fragment of markup.
 
 ## The stylesheet
 

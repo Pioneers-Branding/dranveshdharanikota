@@ -53,24 +53,40 @@ DirectoryIndex index.php
   RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 
   # Serve <route>.php for the clean URL without redirecting.
+  #
   # The second condition keeps directories that hold no page of their own,
   # /css and /photos among them, from rewriting to a file that does not exist.
+  # There is deliberately no !-d guard: /services and /techniques ARE
+  # directories and still have to resolve to services.php and techniques.php.
+  #
+  # This tests %{REQUEST_FILENAME}, the path the server already worked out for
+  # the request, rather than building one from %{DOCUMENT_ROOT}. The two are
+  # the same on a plain domain-root install, but DOCUMENT_ROOT is wrong
+  # whenever the site sits in a subfolder or the host points the domain
+  # somewhere other than the account root, and when it is wrong this condition
+  # silently fails and every page 404s while the homepage still works.
+  # The substitution is relative for the same reason.
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-  RewriteRule ^(.+?)/?$ /$1.php [L]
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(.+?)/?$ $1.php [L]
 </IfModule>
 
 ErrorDocument 404 /404.php
 
 # The shared includes are pulled in by the page files and are never a page of
 # their own. Refuse them if anyone asks for one directly.
+#
+# Both spellings are wrapped, so on a server that has neither module this block
+# does nothing rather than failing the whole site with a 500.
 <FilesMatch "^(header|footer|header-include|icons|router)\.php$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
   <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
+    <IfModule mod_access_compat.c>
+      Order allow,deny
+      Deny from all
+    </IfModule>
   </IfModule>
 </FilesMatch>
 
