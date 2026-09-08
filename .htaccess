@@ -1,83 +1,124 @@
-# Dr. Anvesh Dharanikota - site server configuration (Apache / LiteSpeed)
+# Dr. Anvesh Dharanikota - site server configuration
 #
 # URL policy: every page keeps the exact address it had on the React site, with
-# no trailing slash and no file extension. Each page is one .php file named
+# no trailing slash and no .php on the end. Each page is one .php file named
 # after its route, and that file is served internally, so /services/gi-thoracic
-# answers 200 from services/gi-thoracic.php rather than redirecting anywhere.
+# answers 200 from services/gi-thoracic.php without redirecting anywhere.
 #
-# The host must run PHP. Any ordinary shared host does, Hostinger included.
+# The host must run PHP. Any ordinary shared host does.
+#
+# ---------------------------------------------------------------------------
+# Note on how this file is laid out
+#
+# The rewrite rules below sit at the top level, NOT inside <IfModule>. That is
+# deliberate. Apache reads them either way, but OpenLiteSpeed, which is what
+# CyberPanel installs, has only partial .htaccess support: it looks for rewrite
+# directives and ignores the rest, and directives buried inside a container it
+# does not handle can be skipped entirely. Keeping them unwrapped and first is
+# the arrangement most likely to be read by whatever is serving the site.
+#
+# Everything after the rewrite section is Apache-only and stays wrapped, so a
+# server that does not support those directives skips them harmlessly.
+#
+# If NOTHING in this file appears to take effect, the server is not reading it
+# at all. That is a server setting, not a mistake in this file. See
+# rewrite-rules.txt for the fix.
+# ---------------------------------------------------------------------------
 
-Options -Indexes
-DirectoryIndex index.php
+RewriteEngine On
+RewriteBase /
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
+# Canonical host: https, no www, matching the canonical tags the pages carry.
+# Both conditions must fail before redirecting: on a host that terminates TLS
+# at a proxy %{HTTPS} reads as off even for an https request, and testing it
+# alone would redirect forever. Delete this pair if the host already forces
+# https, which most now do.
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # mod_dir would otherwise 301 /x to /x/ and change every indexed URL.
-  DirectorySlash Off
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-  # Canonical host: https, no www. Matches the canonical tags the pages carry.
-  # Both conditions must fail before redirecting: on hosts that terminate TLS
-  # at a proxy, %{HTTPS} is off even for HTTPS requests, and checking it alone
-  # would redirect forever. Delete this block if the host already forces HTTPS.
-  RewriteCond %{HTTPS} !=on
-  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# /path/ -> /path
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.*)/$ /$1 [R=301,L]
 
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+# The next four rules test THE_REQUEST, the literal request line the browser
+# sent, rather than the current address. This ruleset runs again after the
+# internal rewrite further down, and testing the rewritten address would send
+# /contact back and forth forever.
 
-  # /path/ -> /path
-  RewriteCond %{REQUEST_URI} !^/$
-  RewriteRule ^(.*)/$ /$1 [R=301,L]
+# /index.php -> /
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+RewriteRule ^index\.php$ / [R=301,L]
 
-  # The four rules below match on THE_REQUEST, the literal request line the
-  # browser sent, rather than on the current URI. In .htaccess context Apache
-  # re-runs this ruleset after the internal rewrite at the bottom, and matching
-  # the rewritten URI would bounce /path straight back forever.
+# /contact.php -> /contact, so the extension never shows in the address bar
+RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
+RewriteRule ^(.+)\.php$ /$1 [R=301,L]
 
-  # /index.php -> /
-  RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
-  RewriteRule ^index\.php$ / [R=301,L]
+# Addresses this site used before it was PHP, kept so old links and anything
+# still in Google's index land on the right page instead of an error.
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
 
-  # /path.php -> /path
-  RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
-  RewriteRule ^(.+)\.php$ /$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
+RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 
-  # Addresses this site used before it was PHP, kept so old links and anything
-  # still in Google's index land on the right page instead of a 404.
-  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
-  RewriteRule ^index\.html$ / [R=301,L]
+# The shared includes are not pages. Without this, the clean-URL rule below
+# would happily serve header.php for /header. They also refuse a direct request
+# in PHP, but that guard cannot fire on a server that hands the request to a
+# different script, so block the address here as well.
+RewriteRule ^(header|footer|header-include|icons|router)/?$ /404.php [L]
 
-  RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
-  RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
+# The rule that matters: serve <route>.php for the clean URL, without
+# redirecting, so /contact stays /contact in the address bar.
+#
+# There is deliberately no !-d guard: /services and /techniques are real
+# directories that still have to resolve to services.php and techniques.php.
+# %{REQUEST_FILENAME} is the path the server already worked out for this
+# request, which is correct even when the site is not at the domain root.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
 
-  # Serve <route>.php for the clean URL without redirecting.
-  #
-  # The second condition keeps directories that hold no page of their own,
-  # /css and /photos among them, from rewriting to a file that does not exist.
-  # There is deliberately no !-d guard: /services and /techniques ARE
-  # directories and still have to resolve to services.php and techniques.php.
-  #
-  # This tests %{REQUEST_FILENAME}, the path the server already worked out for
-  # the request, rather than building one from %{DOCUMENT_ROOT}. The two are
-  # the same on a plain domain-root install, but DOCUMENT_ROOT is wrong
-  # whenever the site sits in a subfolder or the host points the domain
-  # somewhere other than the account root, and when it is wrong this condition
-  # silently fails and every page 404s while the homepage still works.
-  # The substitution is relative for the same reason.
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME}.php -f
-  RewriteRule ^(.+?)/?$ $1.php [L]
-</IfModule>
+# Anything left over is a genuine miss, so hand it to the site's own 404 page.
+#
+# This is here because OpenLiteSpeed ignores ErrorDocument in .htaccess, which
+# is why a wrong address showed the grey LiteSpeed error page instead of the
+# site's. Reaching 404.php by rewrite would normally answer 200, so 404.php
+# sends the 404 status itself.
+#
+# ^.+$ rather than ^ so that the homepage, whose path is empty here, can never
+# match. Real files are excluded, so css, js and photos are untouched.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.+$ /404.php [L]
 
+# ---------------------------------------------------------------------------
+# Everything below is Apache only. OpenLiteSpeed ignores it.
+# ---------------------------------------------------------------------------
+
+# Apache's own error page setting. Harmless duplication of the rewrite above:
+# whichever the server supports, the visitor gets the site's 404 page.
 ErrorDocument 404 /404.php
 
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+<IfModule mod_dir.c>
+  DirectoryIndex index.php
+  # Without this, mod_dir would 301 /services to /services/ and change an
+  # address that is in the sitemap and in Google's index.
+  DirectorySlash Off
+</IfModule>
+
 # The shared includes are pulled in by the page files and are never a page of
-# their own. Refuse them if anyone asks for one directly.
+# their own. Each one also refuses a direct request in PHP, so this block is a
+# second lock rather than the only one.
 #
-# Both spellings are wrapped, so on a server that has neither module this block
-# does nothing rather than failing the whole site with a 500.
+# Both spellings are wrapped, so a server with neither module does nothing here
+# rather than failing every page with a 500.
 <FilesMatch "^(header|footer|header-include|icons|router)\.php$">
   <IfModule mod_authz_core.c>
     Require all denied

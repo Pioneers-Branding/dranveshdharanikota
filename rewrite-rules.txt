@@ -89,20 +89,31 @@ RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+?)/?$ $1.php [L]
+
+# Anything left over is a genuine miss, so hand it to the site's own 404 page.
+# 404.php sends the 404 status itself, so this does not need ErrorDocument,
+# which OpenLiteSpeed ignores anyway. ^.+$ rather than ^ keeps the homepage,
+# whose path is empty here, from ever matching.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.+$ /404.php [L]
 ==== paste to here ====
 
 
-The custom 404 page, if you used Option 2
------------------------------------------
+The custom 404 page
+-------------------
 
-The rules above do not cover error pages, so a bad address would still show the
-LiteSpeed 404 rather than the site's own. In CyberPanel -> vHost Conf, add:
+The last rule in the block above already covers it, and 404.php sets its own
+404 status, so there is nothing else to do. OpenLiteSpeed ignores ErrorDocument
+in .htaccess, which is why the site was showing the grey LiteSpeed error page,
+and routing the miss through a rewrite instead sidesteps that completely.
+
+If you would rather set it at the server, CyberPanel -> vHost Conf accepts:
 
     errorpage 404  {
       url                     /404.php
     }
 
-Save and restart LiteSpeed.
+That is optional. Do not do both and then wonder which one fired.
 
 
 How to tell it worked

@@ -22,10 +22,21 @@ if (strpos($path, '..') !== false) {
     exit('Bad request');
 }
 
-// The shared includes are not pages. The live server denies them too.
-if (preg_match('~^/(header|footer|header-include|icons|router)\.php$~', $path)) {
-    http_response_code(403);
-    exit('Forbidden');
+// Drop the extension, the way .htaccess does, so /contact.php lands on
+// /contact. Doing it here too keeps the built-in server honest: it sets
+// SCRIPT_FILENAME to the requested .php file, which would otherwise trip the
+// direct-request guard inside the shared includes.
+if (preg_match('~^(.*)\.php$~', $path, $m)) {
+    $to = $m[1] === '/index' ? '/' : $m[1];
+    header('Location: ' . $to, true, 301);
+    return true;
+}
+
+// The shared includes are not pages. The live server blocks these too.
+if (preg_match('~^/(header|footer|header-include|icons|router)/?$~', $path)) {
+    http_response_code(404);
+    require __DIR__ . '/404.php';
+    return true;
 }
 
 // Let the built-in server deliver real files itself: css, js, photos.

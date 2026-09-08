@@ -115,6 +115,17 @@ Links in the markup are written as the clean URL, root-absolute, exactly as a
 visitor sees it: `<a href="/services/gi-thoracic">`. Renaming a page means
 renaming one file, updating its `$route`, and updating the links to it.
 
+A wrong address reaches `404.php` through a rewrite rule rather than through
+`ErrorDocument`, because OpenLiteSpeed ignores `ErrorDocument` in `.htaccess`.
+`404.php` therefore sends its own 404 status on the first line, so the page
+answers 404 and not 200 however it was reached. `ErrorDocument` is still in
+`.htaccess` for Apache; whichever the server honours, the visitor gets the same
+page.
+
+The rewrite rules sit at the top level of `.htaccess`, outside any `<IfModule>`
+wrapper, for the same reason. Apache reads them either way, and OpenLiteSpeed
+is more likely to see them there.
+
 **The host must run PHP.** Any ordinary shared host does. Netlify does not, so
 `netlify.toml` no longer applies; it is kept only in case the site ever goes
 back to plain HTML.
