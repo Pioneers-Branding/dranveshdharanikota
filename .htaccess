@@ -26,13 +26,13 @@
 # ---------------------------------------------------------------------------
 
 RewriteEngine On
-RewriteBase /
 
 # Canonical host: https, no www, matching the canonical tags the pages carry.
 # Both conditions must fail before redirecting: on a host that terminates TLS
 # at a proxy %{HTTPS} reads as off even for an https request, and testing it
-# alone would redirect forever. Delete this pair if the host already forces
-# https, which most now do.
+# alone would redirect forever. Local HTTP development hosts are excluded so
+# XAMPP/WAMP and `php -S` do not get sent to an HTTPS port that does not exist.
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(?::[0-9]+)?$ [NC]
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !=https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
@@ -65,6 +65,11 @@ RewriteRule ^index\.html$ / [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
 RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
 
+# Always resolve the homepage through PHP. DirectoryIndex normally does this,
+# but an explicit rule also works on LiteSpeed configurations that do not load
+# the mod_dir compatibility layer.
+RewriteRule ^$ index.php [L]
+
 # The shared includes are not pages. Without this, the clean-URL rule below
 # would happily serve header.php for /header. They also refuse a direct request
 # in PHP, but that guard cannot fire on a server that hands the request to a
@@ -78,14 +83,18 @@ RewriteRule ^(header|footer|header-include|icons|router)/?$ /404.php [L]
 # OpenLiteSpeed, REQUEST_FILENAME can still be unresolved while a request is
 # being rewritten below an existing directory, so the generic -f check below
 # may never see services/foo.php even when that file exists.
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
 RewriteRule ^(services|techniques)/([^/]+)/?$ $1/$2.php [L]
 
 # There is deliberately no !-d guard: /services and /techniques are real
 # directories that still have to resolve to services.php and techniques.php.
-# %{REQUEST_FILENAME} is the path the server already worked out for this
-# request, which is correct even when the site is not at the domain root.
+# Only the existing-file check is needed. Testing REQUEST_FILENAME.php with a
+# second filesystem condition looks sensible, but several LiteSpeed builds do
+# not resolve that constructed path consistently. The URI guard prevents the
+# internal rewrite from appending .php again on its second pass; the real-file
+# check keeps css, js and photos untouched.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
 RewriteRule ^(.+?)/?$ $1.php [L]
 
 # Anything left over is a genuine miss, so hand it to the site's own 404 page.

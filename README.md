@@ -105,8 +105,11 @@ redirects. It also 301s the addresses this site used before it was PHP, so old
 links still land correctly. For Nginx:
 
 ```nginx
+index index.php;
 location / {
-  try_files $uri $uri.php =404;
+  # Test the PHP page first, otherwise /services and /techniques resolve as
+  # directories before services.php and techniques.php can be selected.
+  try_files $uri.php $uri $uri/ =404;
 }
 error_page 404 /404.php;
 ```
@@ -129,6 +132,9 @@ is more likely to see them there.
 **The host must run PHP.** Any ordinary shared host does. Netlify does not, so
 `netlify.toml` no longer applies; it is kept only in case the site ever goes
 back to plain HTML.
+
+The rewrite rules skip the HTTPS redirect for `localhost`, `127.0.0.1` and
+`::1`, so the folder also works over ordinary local HTTP during testing.
 
 ## If every page 404s except the homepage
 

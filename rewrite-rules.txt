@@ -39,7 +39,9 @@ OPTION 2 - paste the rules into the panel instead
   1. CyberPanel -> Websites -> List Websites -> dranveshdharanikota.com
   2. Click "Rewrite Rules"
   3. Delete whatever is in the box and paste everything between the two
-     ==== lines below
+     ==== lines below. These rules deliberately have a leading `/` because
+     CyberPanel puts them in the OpenLiteSpeed virtual-host rewrite context;
+     do not paste this block into `.htaccess`.
   4. Save, then open https://dranveshdharanikota.com/contact
 
 This only covers the URL rules. The custom 404 page needs the separate step at
@@ -47,21 +49,22 @@ the bottom of this file.
 
 ==== paste from here ====
 RewriteEngine On
-RewriteBase /
 
 # Canonical host: https, no www. Both conditions must fail before redirecting,
 # because on a server that terminates TLS at a proxy %{HTTPS} reads as off even
-# for an https request, and testing it alone would redirect forever.
+# for an https request, and testing it alone would redirect forever. Local HTTP
+# development hosts are excluded.
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(?::[0-9]+)?$ [NC]
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^/(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+RewriteRule ^/(.*)$ https://%1/$1 [R=301,L]
 
 # /path/ -> /path
 RewriteCond %{REQUEST_URI} !^/$
-RewriteRule ^(.*)/$ /$1 [R=301,L]
+RewriteRule ^/(.*)/$ /$1 [R=301,L]
 
 # The rules that follow test THE_REQUEST, the literal request line the browser
 # sent, rather than the current address. The ruleset runs again after the
@@ -70,37 +73,43 @@ RewriteRule ^(.*)/$ /$1 [R=301,L]
 
 # /index.php -> /
 RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
-RewriteRule ^index\.php$ / [R=301,L]
+RewriteRule ^/index\.php$ / [R=301,L]
 
 # /path.php -> /path
 RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
-RewriteRule ^(.+)\.php$ /$1 [R=301,L]
+RewriteRule ^/(.+)\.php$ /$1 [R=301,L]
 
 # Addresses this site used before it was PHP, so old links still land right.
 RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
-RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^/index\.html$ / [R=301,L]
 
 RewriteCond %{THE_REQUEST} \s/+(.+?)(/index)?\.html[\s?] [NC]
-RewriteRule ^(.+?)(/index)?\.html$ /$1 [R=301,L]
+RewriteRule ^/(.+?)(/index)?\.html$ /$1 [R=301,L]
+
+# Always resolve the homepage through PHP, even when DirectoryIndex is not
+# available in the server's compatibility layer.
+RewriteRule ^/$ /index.php [L]
 
 # The rule that matters: serve <route>.php for the clean URL, without
 # redirecting. No !-d guard, because /services and /techniques are real
 # directories that still have to resolve to services.php and techniques.php.
-# Route nested pages explicitly first. OpenLiteSpeed can leave
-# REQUEST_FILENAME unresolved below a real directory, which makes the generic
-# -f check miss files such as services/gi-thoracic.php.
-RewriteRule ^(services|techniques)/([^/]+)/?$ $1/$2.php [L]
+# Route nested pages explicitly first. The URI guard prevents the internal
+# rewrite from appending .php again on its second pass. The real-file check
+# keeps css, js and photos untouched; unlike the previous version this does not
+# depend on LiteSpeed resolving the constructed REQUEST_FILENAME.php path.
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
+RewriteRule ^/(services|techniques)/([^/]+)/?$ /$1/$2.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+?)/?$ $1.php [L]
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
+RewriteRule ^/(.+?)/?$ /$1.php [L]
 
 # Anything left over is a genuine miss, so hand it to the site's own 404 page.
 # 404.php sends the 404 status itself, so this does not need ErrorDocument,
 # which OpenLiteSpeed ignores anyway. ^.+$ rather than ^ keeps the homepage,
 # whose path is empty here, from ever matching.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^.+$ /404.php [L]
+RewriteRule ^/.+$ /404.php [L]
 ==== paste to here ====
 
 
