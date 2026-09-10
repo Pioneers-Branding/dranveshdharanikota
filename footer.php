@@ -56,9 +56,9 @@ if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
             <div class="stack stack--lg">
               <h4 class="footer__subheading-2">Services &amp; Techniques</h4>
               <ul class="stack stack--sm">
-                <li><a class="footer-link" href="/services/breast-oncoplastic">Breast Oncoplastic Surgery</a></li>
+                <li><a class="footer-link" href="/services/breast-cancer-treatment-hyderabad">Breast Oncoplastic Surgery</a></li>
                 <li><a class="footer-link" href="/services/gi-thoracic">GI &amp; Thoracic Oncology</a></li>
-                <li><a class="footer-link" href="/services/gynecologic-oncology">Gynecologic Oncology</a></li>
+                <li><a class="footer-link" href="/services/gynecologic-cancer-treatment-hyderabad">Gynecologic Oncology</a></li>
                 <li><a class="footer-link" href="/techniques/robotic-surgery">Robotic Surgery</a></li>
                 <li><a class="footer-link" href="/techniques/crs-hipec">CRS &amp; HIPEC</a></li>
               </ul>

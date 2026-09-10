@@ -1,9 +1,9 @@
 <?php
 $route          = '/';
-$title          = 'Dr. Anvesh Dharanikota | Surgical Oncologist, Hyderabad';
-$description    = 'Senior Consultant Surgical Oncologist Dr. Anvesh Dharanikota, MS, MCh, offers robotic, laparoscopic and oncoplastic breast cancer surgery in Hyderabad.';
-$og_title       = 'Dr. Anvesh Dharanikota — Surgical Oncologist in Hyderabad';
-$og_description = 'MBBS, MS (Gold Medalist), MCh Surgical Oncology. 12+ years of minimally invasive, robotic and oncoplastic breast cancer surgery at Arete Hospitals, Gachibowli.';
+$title          = 'Best Oncology Surgeon in Hyderabad | Dr. Anvesh';
+$description    = 'Best oncology surgeon and cancer doctor in Hyderabad. Dr. Anvesh Dharanikota offers radiation oncology, robotic, laparoscopic, and oncoplastic cancer surgery.';
+$og_title       = 'Best Oncology Surgeon in Hyderabad | Dr. Anvesh';
+$og_description = 'Best oncology surgeon and cancer doctor in Hyderabad. Dr. Anvesh Dharanikota offers radiation oncology, robotic, laparoscopic, and oncoplastic cancer surgery.';
 $og_type        = 'website';
 
 $schema = <<<'SCHEMA'
@@ -143,7 +143,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div>
-                        <a class="advanced-cancer-care__link" href="/services/breast-oncoplastic">
+                        <a class="advanced-cancer-care__link" href="/services/breast-cancer-treatment-hyderabad">
                           <span>Read More</span>
                           <svg class="advanced-cancer-care__icon-2" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>

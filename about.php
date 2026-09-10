@@ -1,7 +1,7 @@
 <?php
 $route          = '/about';
-$title          = 'About Dr. Anvesh Dharanikota | Surgical Oncologist, Hyderabad';
-$description    = 'Dr. Anvesh Dharanikota, MCh surgical oncologist in Hyderabad — 12+ years in robotic and laparoscopic surgery, oncoplastic breast surgery and CRS & HIPEC.';
+$title       = 'About Best Cancer Doctor in Hyderabad | Dr. Anvesh';
+$description = 'Meet Dr. Anvesh Dharanikota, famous oncology specialist and top cancer doctor in Hyderabad. Specialized in robotic and minimally invasive cancer treatments.';
 $og_title       = 'About Dr. Anvesh Dharanikota — Surgical Oncologist';
 $og_description = '12+ years in surgical oncology: MS Gold Medalist, MCh from Kidwai Memorial Institute of Oncology, Head of Department at Arete Institute of Oncology.';
 

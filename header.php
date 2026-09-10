@@ -198,15 +198,15 @@ ob_start();
                   <div class="dropdown-panel nav-dropdown" id="nav-dd-2">
                     <div>
                       <a class="dropdown-link" href="/services/gi-thoracic">GI &amp; Thoracic Overview</a>
-                      <a class="dropdown-link" href="/services/esophageal-cancer">Esophageal Cancer</a>
-                      <a class="dropdown-link" href="/services/gastric-cancer">Stomach (Gastric) Cancer</a>
-                      <a class="dropdown-link" href="/services/colorectal-cancer">Colorectal Cancer</a>
-                      <a class="dropdown-link" href="/services/hpb">HPB (Liver,Pancreas,Gallbladder)</a>
-                      <a class="dropdown-link" href="/services/lung-cancer">Lung Cancer</a>
-                      <a class="dropdown-link" href="/services/gynecologic-oncology">Gynecologic Oncology</a>
-                      <a class="dropdown-link" href="/services/head-neck-oncology">Head &amp; Neck Oncology</a>
-                      <a class="dropdown-link" href="/services/uro-oncology">Uro-Oncology</a>
-                      <a class="dropdown-link" href="/services/musculoskeletal-oncology">Musculoskeletal Oncology</a>
+                      <a class="dropdown-link" href="/services/esophageal-cancer-treatment-hyderabad">Esophageal Cancer</a>
+                      <a class="dropdown-link" href="/services/stomach-gastric-cancer-treatment-hyderabad">Stomach (Gastric) Cancer</a>
+                      <a class="dropdown-link" href="/services/colorectal-cancer-treatment-hyderabad">Colorectal Cancer</a>
+                      <a class="dropdown-link" href="/services/hpb-liver-pancreatic-cancer-treatment-hyderabad">HPB (Liver,Pancreas,Gallbladder)</a>
+                      <a class="dropdown-link" href="/services/lung-cancer-treatment-hyderabad">Lung Cancer</a>
+                      <a class="dropdown-link" href="/services/gynecologic-cancer-treatment-hyderabad">Gynecologic Oncology</a>
+                      <a class="dropdown-link" href="/services/head-neck-cancer-treatment-hyderabad">Head &amp; Neck Oncology</a>
+                      <a class="dropdown-link" href="/services/urological-cancer-treatment-hyderabad">Uro-Oncology</a>
+                      <a class="dropdown-link" href="/services/bone-cancer-treatment-hyderabad">Musculoskeletal Oncology</a>
                     </div>
                   </div>
                 </div>
@@ -222,7 +222,7 @@ ob_start();
                       <a class="dropdown-link" href="/techniques/robotic-surgery">Robotic Surgery</a>
                       <a class="dropdown-link" href="/techniques/crs-hipec">CRS &amp; HIPEC</a>
                       <a class="dropdown-link" href="/techniques/vats">VATS (Thoracic)</a>
-                      <a class="dropdown-link" href="/services/breast-oncoplastic">Breast Oncoplastic Surgery</a>
+                      <a class="dropdown-link" href="/services/breast-cancer-treatment-hyderabad">Breast Oncoplastic Surgery</a>
                     </div>
                   </div>
                 </div>
@@ -263,22 +263,22 @@ ob_start();
             <div class="stack stack--xs">
               <a class="mobile-nav__link mobile-nav__link--default" href="/services">Services</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/gi-thoracic">GI &amp; Thoracic Overview</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/esophageal-cancer">Esophageal Cancer</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/gastric-cancer">Stomach (Gastric) Cancer</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/colorectal-cancer">Colorectal Cancer</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/hpb">HPB (Liver,Pancreas,Gallbladder)</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/lung-cancer">Lung Cancer</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/gynecologic-oncology">Gynecologic Oncology</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/head-neck-oncology">Head &amp; Neck Oncology</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/uro-oncology">Uro-Oncology</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/musculoskeletal-oncology">Musculoskeletal Oncology</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/esophageal-cancer-treatment-hyderabad">Esophageal Cancer</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/stomach-gastric-cancer-treatment-hyderabad">Stomach (Gastric) Cancer</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/colorectal-cancer-treatment-hyderabad">Colorectal Cancer</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/hpb-liver-pancreatic-cancer-treatment-hyderabad">HPB (Liver,Pancreas,Gallbladder)</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/lung-cancer-treatment-hyderabad">Lung Cancer</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/gynecologic-cancer-treatment-hyderabad">Gynecologic Oncology</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/head-neck-cancer-treatment-hyderabad">Head &amp; Neck Oncology</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/urological-cancer-treatment-hyderabad">Uro-Oncology</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/bone-cancer-treatment-hyderabad">Musculoskeletal Oncology</a>
             </div>
             <div class="stack stack--xs">
               <a class="mobile-nav__link mobile-nav__link--default" href="/techniques">Key Techniques</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/techniques/robotic-surgery">Robotic Surgery</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/techniques/crs-hipec">CRS &amp; HIPEC</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/techniques/vats">VATS (Thoracic)</a>
-              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/breast-oncoplastic">Breast Oncoplastic Surgery</a>
+              <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/services/breast-cancer-treatment-hyderabad">Breast Oncoplastic Surgery</a>
             </div>
             <div class="stack stack--xs">
               <a class="mobile-nav__link mobile-nav__link--default" href="/resources">Resources</a>

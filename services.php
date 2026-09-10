@@ -107,7 +107,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/breast-oncoplastic">
+                        <a class="button-3" href="/services/breast-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -193,7 +193,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/esophageal-cancer">
+                        <a class="button-3" href="/services/esophageal-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -236,7 +236,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-5" href="/services/gastric-cancer">
+                        <a class="button-5" href="/services/stomach-gastric-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -279,7 +279,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/colorectal-cancer">
+                        <a class="button-3" href="/services/colorectal-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -322,7 +322,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-5" href="/services/hpb">
+                        <a class="button-5" href="/services/hpb-liver-pancreatic-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -365,7 +365,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/lung-cancer">
+                        <a class="button-3" href="/services/lung-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -408,7 +408,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-5" href="/services/gynecologic-oncology">
+                        <a class="button-5" href="/services/gynecologic-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -451,7 +451,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/head-neck-oncology">
+                        <a class="button-3" href="/services/head-neck-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -494,7 +494,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-5" href="/services/uro-oncology">
+                        <a class="button-5" href="/services/urological-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
@@ -537,7 +537,7 @@ require __DIR__ . '/header.php';
                         </div>
                       </div>
                       <div tabindex="0">
-                        <a class="button-3" href="/services/musculoskeletal-oncology">
+                        <a class="button-3" href="/services/bone-cancer-treatment-hyderabad">
                           <span>Learn More</span>
                           <svg class="advanced-cancer-care__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
                         </a>
