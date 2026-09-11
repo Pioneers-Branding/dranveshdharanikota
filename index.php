@@ -559,6 +559,87 @@ require __DIR__ . '/header.php';
               </div>
             </div>
           </section>
+
+          <!-- EEAT Certifications Section -->
+          <style>
+            .cert-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+            .cert-grid > .luxury-card { flex: 1 1 200px; max-width: 250px; }
+            @media (max-width: 575px) { .cert-grid > .luxury-card { max-width: 100%; } }
+          </style>
+          <section id="certifications" class="section section--snug" style="background-color: var(--color-surface-1, #f8fafc);">
+            <div class="container container--relative">
+              <div class="section-head section-head--snug" data-reveal>
+                <div class="pill-9" data-reveal><span class="label-4">CREDENTIALS &amp; TRUST</span></div>
+                <h2 class="page-title page-title--default" data-reveal>Certifications &amp; Registrations</h2>
+                <p class="lede-9" data-reveal>Verified medical qualifications and state council registrations ensuring the highest standard of specialized cancer care.</p>
+              </div>
+              <div class="cert-grid">
+                <div class="luxury-card group" data-reveal>
+                  <div class="excellence-recognized-globally__card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 1rem 0.5rem 1.25rem 0.5rem;">
+                    <div class="excellence-recognized-globally__decoration-2"></div>
+                    <a href="javascript:void(0);" onclick="openCertModal('/photos/cert-telangana-medical-council.jpg')" style="display: block; width: 100%; text-align: center; cursor: zoom-in;">
+                      <img src="/photos/cert-telangana-medical-council.jpg" alt="Telangana State Medical Council Registration" loading="lazy" style="height: 250px; width: 100%; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                    <h3 class="excellence-recognized-globally__subheading" style="font-size: 1rem; text-align: center; margin: 0; line-height: 1.4;">TSMC Registration</h3>
+                    <div class="excellence-recognized-globally__decoration"></div>
+                  </div>
+                </div>
+                <div class="luxury-card group" data-reveal>
+                  <div class="excellence-recognized-globally__card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 1rem 0.5rem 1.25rem 0.5rem;">
+                    <div class="excellence-recognized-globally__decoration-3"></div>
+                    <a href="javascript:void(0);" onclick="openCertModal('/photos/cert-mch-surgical-oncology.jpg')" style="display: block; width: 100%; text-align: center; cursor: zoom-in;">
+                      <img src="/photos/cert-mch-surgical-oncology.jpg" alt="M.Ch Surgical Oncology Certificate" loading="lazy" style="height: 250px; width: 100%; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                    <h3 class="excellence-recognized-globally__subheading" style="font-size: 1rem; text-align: center; margin: 0; line-height: 1.4;">M.Ch Surgical Oncology</h3>
+                    <div class="excellence-recognized-globally__decoration"></div>
+                  </div>
+                </div>
+                <div class="luxury-card group" data-reveal>
+                  <div class="excellence-recognized-globally__card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 1rem 0.5rem 1.25rem 0.5rem;">
+                    <div class="excellence-recognized-globally__decoration-2"></div>
+                    <a href="javascript:void(0);" onclick="openCertModal('/photos/cert-ms-general-surgery.jpg')" style="display: block; width: 100%; text-align: center; cursor: zoom-in;">
+                      <img src="/photos/cert-ms-general-surgery.jpg" alt="MS General Surgery Certificate" loading="lazy" style="height: 250px; width: 100%; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                    <h3 class="excellence-recognized-globally__subheading" style="font-size: 1rem; text-align: center; margin: 0; line-height: 1.4;">MS General Surgery</h3>
+                    <div class="excellence-recognized-globally__decoration"></div>
+                  </div>
+                </div>
+                <div class="luxury-card group" data-reveal>
+                  <div class="excellence-recognized-globally__card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 1rem 0.5rem 1.25rem 0.5rem;">
+                    <div class="excellence-recognized-globally__decoration-3"></div>
+                    <a href="javascript:void(0);" onclick="openCertModal('/photos/cert-mbbs.jpg')" style="display: block; width: 100%; text-align: center; cursor: zoom-in;">
+                      <img src="/photos/cert-mbbs.jpg" alt="MBBS Certificate" loading="lazy" style="height: 250px; width: 100%; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                    <h3 class="excellence-recognized-globally__subheading" style="font-size: 1rem; text-align: center; margin: 0; line-height: 1.4;">MBBS Degree</h3>
+                    <div class="excellence-recognized-globally__decoration"></div>
+                  </div>
+                </div>
+                <div class="luxury-card group" data-reveal>
+                  <div class="excellence-recognized-globally__card" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 1rem 0.5rem 1.25rem 0.5rem;">
+                    <div class="excellence-recognized-globally__decoration-2"></div>
+                    <a href="javascript:void(0);" onclick="openCertModal('/photos/case-of-the-month-vats.jpg')" style="display: block; width: 100%; text-align: center; cursor: zoom-in;">
+                      <img src="/photos/case-of-the-month-vats.jpg" alt="Case of the Month: Uniportal VATS" loading="lazy" style="height: 250px; width: 100%; object-fit: contain; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                    <h3 class="excellence-recognized-globally__subheading" style="font-size: 1rem; text-align: center; margin: 0; line-height: 1.4;">VATS Publication</h3>
+                    <div class="excellence-recognized-globally__decoration"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Custom Lightbox Popup for Certificates -->
+            <div id="certModal" style="display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.85); cursor: zoom-out; backdrop-filter: blur(4px);" onclick="this.style.display='none'">
+              <span style="position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+              <img id="certModalImg" style="margin: auto; display: block; max-width: 90%; max-height: 90vh; position: relative; top: 50%; transform: translateY(-50%); box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-radius: 8px;">
+            </div>
+            <script>
+            function openCertModal(src) {
+              document.getElementById('certModal').style.display = 'block';
+              document.getElementById('certModalImg').src = src;
+            }
+            </script>
+          </section>
+
           <section class="section section--snug">
             <div class="container container--default">
               <div class="section-head section-head--snug" data-reveal>
