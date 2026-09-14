@@ -129,6 +129,7 @@ require __DIR__ . '/header.php';
                 $blogs = [];
                 // Read all php files in the blog directory
                 foreach (glob(__DIR__ . '/blog/*.php') as $file) {
+                    if (basename($file) === 'index.php') continue;
                     
                     $content = file_get_contents($file);
                     
