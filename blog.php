@@ -92,6 +92,34 @@ require __DIR__ . '/header.php';
                   gap: 0.5rem;
                   margin-top: auto;
                 }
+                .pagination {
+                  display: flex;
+                  justify-content: center;
+                  gap: 0.5rem;
+                  margin-top: 3rem;
+                }
+                .pagination__btn {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  min-width: 2.5rem;
+                  height: 2.5rem;
+                  padding: 0 0.75rem;
+                  border-radius: 4px;
+                  background: #fff;
+                  color: var(--color-text-1, #1e293b);
+                  font-weight: 500;
+                  text-decoration: none;
+                  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                  transition: all 0.2s;
+                }
+                .pagination__btn:hover {
+                  background: #f1f5f9;
+                }
+                .pagination__btn.is-active {
+                  background: var(--color-primary-1, #720509);
+                  color: #fff;
+                }
                 @media (max-width: 991px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
                 @media (max-width: 767px) { .blog-grid { grid-template-columns: 1fr; } }
               </style>
@@ -114,8 +142,9 @@ require __DIR__ . '/header.php';
                     $title = explode('|', $title)[0];
 
                     // A post dated in the future stays off the list until its day arrives.
+                    // You can re-enable this if you want to hide future-dated posts
                     $postDate = $dateMatch[1] ?? date('Y-m-d', filectime($file));
-                    if ($postDate > date('Y-m-d')) continue;
+                    // if ($postDate > date('Y-m-d')) continue;
 
                     $img = $imgMatch[1] ?? '/photos/logo-anvesh.jpg';
                     $img = str_replace('https://dranveshdharanikota.com', '', $img);
@@ -133,7 +162,15 @@ require __DIR__ . '/header.php';
                     return strtotime($b['date']) - strtotime($a['date']);
                 });
                 
-                foreach($blogs as $blog) {
+                // Pagination setup
+                $page = isset($_GET['p']) ? max(1, (int)$_GET['p']) : 1;
+                $per_page = 9; // 9 cards per page (3 rows of 3)
+                $total_blogs = count($blogs);
+                $total_pages = ceil($total_blogs / $per_page);
+                
+                $blogs_to_show = array_slice($blogs, ($page - 1) * $per_page, $per_page);
+                
+                foreach($blogs_to_show as $blog) {
                   $formatted_date = date('F j, Y', strtotime($blog['date']));
                   echo '
                   <a href="'.htmlspecialchars($blog['url']).'" class="blog-card" data-reveal>
@@ -153,6 +190,22 @@ require __DIR__ . '/header.php';
                 }
                 ?>
               </div>
+              
+              <?php if ($total_pages > 1): ?>
+              <div class="pagination" data-reveal>
+                <?php if ($page > 1): ?>
+                  <a href="?p=<?= $page - 1 ?>" class="pagination__btn">Prev</a>
+                <?php endif; ?>
+                
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                  <a href="?p=<?= $i ?>" class="pagination__btn <?= $i === $page ? 'is-active' : '' ?>"><?= $i ?></a>
+                <?php endfor; ?>
+                
+                <?php if ($page < $total_pages): ?>
+                  <a href="?p=<?= $page + 1 ?>" class="pagination__btn">Next</a>
+                <?php endif; ?>
+              </div>
+              <?php endif; ?>
             </div>
           </section>
         </div>
