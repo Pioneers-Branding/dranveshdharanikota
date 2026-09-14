@@ -164,7 +164,7 @@ require __DIR__ . '/../header.php';
 
   <h2>1. Dr. Anvesh Dharanikota</h2>
   <div class="doctor-profile">
-    <img src="/photos/logo-anvesh.png" alt="Dr. Anvesh Dharanikota" class="doctor-img">
+    <img src="/photos/anvesh.webp" alt="Dr. Anvesh Dharanikota" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Anvesh Dharanikota</h3>
       <p><strong>Specialty:</strong> Minimally Invasive and Complex Surgical Oncology</p>
