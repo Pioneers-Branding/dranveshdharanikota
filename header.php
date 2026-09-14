@@ -121,6 +121,7 @@ function e($value)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title) ?></title>
+    <meta name="google-site-verification" content="-JAFMJvY6qluG6TALNovEQMKnPHGFt2vHA3DovpsANA" />
     <meta name="description" content="<?= e($description) ?>">
     <link rel="canonical" href="<?= e($canonical) ?>">
     <meta name="robots" content="<?= e($robots) ?>">
