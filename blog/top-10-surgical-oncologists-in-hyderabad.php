@@ -3,7 +3,7 @@ $title = "Top 10 Surgical Oncologists in Hyderabad | Dr. Anvesh Dharanikota";
 $description = "Looking for the best surgical oncologist in Hyderabad? Here is a curated list of the top 10 cancer surgeons, their specialties, and how to book a consultation.";
 $og_title = "Top 10 Surgical Oncologists in Hyderabad | Best Cancer Surgeons";
 $og_description = "Discover the top surgical oncologists in Hyderabad. From advanced robotic surgeries to minimally invasive procedures, find the right expert for your cancer care.";
-$og_image = "https://dranveshdharanikota.com/photos/logo-anvesh.jpg";
+$og_image = "https://dranveshdharanikota.com/photos/logo-anvesh.png";
 $date = "2026-09-14";
 
 // JSON-LD Schema
@@ -11,7 +11,7 @@ $schema = '{
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Top 10 Surgical Oncologists in Hyderabad",
-  "image": "https://dranveshdharanikota.com/photos/logo-anvesh.jpg",
+  "image": "https://dranveshdharanikota.com/photos/logo-anvesh.png",
   "author": {
     "@type": "Person",
     "name": "Dr. Anvesh Dharanikota",
@@ -22,7 +22,7 @@ $schema = '{
     "name": "Dr. Anvesh Dharanikota",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://dranveshdharanikota.com/photos/logo-anvesh.jpg"
+      "url": "https://dranveshdharanikota.com/photos/logo-anvesh.png"
     }
   },
   "datePublished": "2026-09-14",
@@ -164,7 +164,7 @@ require __DIR__ . '/../header.php';
 
   <h2>1. Dr. Anvesh Dharanikota</h2>
   <div class="doctor-profile">
-    <img src="/photos/logo-anvesh.jpg" alt="Dr. Anvesh Dharanikota" class="doctor-img">
+    <img src="/photos/logo-anvesh.png" alt="Dr. Anvesh Dharanikota" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Anvesh Dharanikota</h3>
       <p><strong>Specialty:</strong> Minimally Invasive and Complex Surgical Oncology</p>
@@ -181,7 +181,7 @@ require __DIR__ . '/../header.php';
 
   <h2>2. Dr. Sreekanth K</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Sreekanth K" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/sreekanth_k_1789386938502.jpg" alt="Dr. Sreekanth K" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Sreekanth K</h3>
       <p><strong>Specialty:</strong> Surgical Oncology (General)</p>
@@ -191,7 +191,7 @@ require __DIR__ . '/../header.php';
 
   <h2>3. Dr. Muralidhar Muddusetty</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Muralidhar Muddusetty" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/muralidhar_muddusetty_1789386969938.jpg" alt="Dr. Muralidhar Muddusetty" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Muralidhar Muddusetty</h3>
       <p><strong>Specialty:</strong> Musculoskeletal Tumors</p>
@@ -201,7 +201,7 @@ require __DIR__ . '/../header.php';
 
   <h2>4. Dr. Madhu Devarasetty</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Madhu Devarasetty" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/madhu_devarasetty_1789386988159.jpg" alt="Dr. Madhu Devarasetty" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Madhu Devarasetty</h3>
       <p><strong>Specialty:</strong> Robotic Surgical Oncology</p>
@@ -211,7 +211,7 @@ require __DIR__ . '/../header.php';
 
   <h2>5. Dr. T. Subramanyeshwar Rao</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. T. Subramanyeshwar Rao" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/subramanyeshwar_rao_1789387004615.jpg" alt="Dr. T. Subramanyeshwar Rao" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. T. Subramanyeshwar Rao</h3>
       <p><strong>Specialty:</strong> Head and Neck Oncology</p>
@@ -221,7 +221,7 @@ require __DIR__ . '/../header.php';
 
   <h2>6. Dr. L.M. Chandra Sekhara Rao</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. L.M. Chandra Sekhara Rao" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/chandra_sekhara_rao_1789387017362.jpg" alt="Dr. L.M. Chandra Sekhara Rao" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. L.M. Chandra Sekhara Rao</h3>
       <p><strong>Specialty:</strong> Head & Neck Surgical Oncology</p>
@@ -231,7 +231,7 @@ require __DIR__ . '/../header.php';
 
   <h2>7. Dr. Umanath Nayak Karopadi</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Umanath Nayak Karopadi" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/umanath_nayak_1789387031354.jpg" alt="Dr. Umanath Nayak Karopadi" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Umanath Nayak Karopadi</h3>
       <p><strong>Specialty:</strong> Head, Neck, and Breast Oncology</p>
@@ -241,7 +241,7 @@ require __DIR__ . '/../header.php';
 
   <h2>8. Dr. Ajay Chanakya Vallabhaneni</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Ajay Chanakya Vallabhaneni" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/ajay_chanakya_1789387042993.jpg" alt="Dr. Ajay Chanakya Vallabhaneni" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Ajay Chanakya Vallabhaneni</h3>
       <p><strong>Specialty:</strong> Surgical Oncology</p>
@@ -251,7 +251,7 @@ require __DIR__ . '/../header.php';
 
   <h2>9. Dr. Sachin Marda</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. Sachin Marda" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/sachin_marda_1789387056963.jpg" alt="Dr. Sachin Marda" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. Sachin Marda</h3>
       <p><strong>Specialty:</strong> Breast and Gynecological Cancers</p>
@@ -261,7 +261,7 @@ require __DIR__ . '/../header.php';
 
   <h2>10. Dr. CH Mohana Vamsy</h2>
   <div class="doctor-profile">
-    <img src="/photos/doctor-placeholder.jpg" alt="Dr. CH Mohana Vamsy" class="doctor-img" onerror="this.src='/photos/logo-anvesh.jpg'">
+    <img src="/photos/mohana_vamsy_1789387069259.jpg" alt="Dr. CH Mohana Vamsy" class="doctor-img">
     <div class="doctor-info">
       <h3>Dr. CH Mohana Vamsy</h3>
       <p><strong>Specialty:</strong> Chief Surgical Oncologist</p>
