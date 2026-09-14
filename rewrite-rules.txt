@@ -97,8 +97,9 @@ RewriteRule ^/$ /index.php [L]
 # rewrite from appending .php again on its second pass. The real-file check
 # keeps css, js and photos untouched; unlike the previous version this does not
 # depend on LiteSpeed resolving the constructed REQUEST_FILENAME.php path.
+RewriteRule ^/blog/?$ /blog/index.php [L]
 RewriteCond %{REQUEST_URI} !\.php$ [NC]
-RewriteRule ^/(services|techniques)/([^/]+)/?$ /$1/$2.php [L]
+RewriteRule ^/(services|techniques|blog)/([^/]+)/?$ /$1/$2.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !\.php$ [NC]

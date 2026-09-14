@@ -5,7 +5,7 @@ $description    = 'Read the latest articles, insights, and news on surgical onco
 $og_title       = 'Blog of Dr. Anvesh Dharanikota';
 $og_description = 'Latest insights on surgical oncology, cancer care, and minimally invasive surgeries.';
 
-require __DIR__ . '/header.php';
+require dirname(__DIR__) . '/header.php';
 ?>
         <div class="page page--default">
           <div style="background: linear-gradient(to right, rgb(114, 5, 9), rgb(0, 32, 80))">
@@ -79,6 +79,11 @@ require __DIR__ . '/header.php';
                   color: var(--color-text-1, #1e293b);
                   line-height: 1.4;
                 }
+                .blog-card__date {
+                  font-size: 0.875rem;
+                  color: var(--color-text-2, #64748b);
+                  margin-bottom: 0.75rem;
+                }
                 .blog-card__read-more {
                   color: var(--color-primary-1, #720509);
                   font-weight: 500;
@@ -93,59 +98,63 @@ require __DIR__ . '/header.php';
               
               <div class="blog-grid">
                 <?php 
-                // 9 Placeholder blog posts for a 3x3 grid
-                $blogs = [
-                  [
-                    'title' => 'Understanding Minimally Invasive Surgery in Oncology',
-                    'image' => '/photos/case-of-the-month-vats.jpg',
-                  ],
-                  [
-                    'title' => 'What to Expect Before and After Breast Cancer Surgery',
-                    'image' => '/photos/unnamed.jpg',
-                  ],
-                  [
-                    'title' => 'Advances in Robotic Surgery for Gastrointestinal Cancers',
-                    'image' => '/photos/sanjay sir.jpg.jpeg',
-                  ],
-                  [
-                    'title' => 'The Role of Multidisciplinary Teams in Cancer Treatment',
-                    'image' => '/photos/doctor.jpeg',
-                  ],
-                  [
-                    'title' => 'Early Detection: Screening Guidelines for Common Cancers',
-                    'image' => '/photos/unnamed (1).jpg',
-                  ],
-                  [
-                    'title' => 'Recovering from Thoracic Surgery: A Patient\'s Guide',
-                    'image' => '/photos/unnamed (2).jpg',
-                  ],
-                  [
-                    'title' => 'Nutritional Support During Cancer Treatments',
-                    'image' => '/photos/IMG_20210227_171718_321.jpg',
-                  ],
-                  [
-                    'title' => 'Palliative Care: Improving Quality of Life for Patients',
-                    'image' => '/photos/DSC_1752.JPG.jpeg',
-                  ],
-                  [
-                    'title' => 'Understanding Different Types of Systemic Therapies',
-                    'image' => '/photos/2023-05-17.jpg',
-                  ]
-                ];
+                $blogs = [];
+                // Read all php files in this directory except index.php
+                foreach (glob(__DIR__ . '/*.php') as $file) {
+                    if (basename($file) === 'index.php') continue;
+                    
+                    $content = file_get_contents($file);
+                    
+                    // Extract metadata using regex
+                    preg_match('/\$title\s*=\s*[\'"](.*?)[\'"];/i', $content, $titleMatch);
+                    preg_match('/\$og_image\s*=\s*[\'"](.*?)[\'"];/i', $content, $imgMatch);
+                    preg_match('/\$date\s*=\s*[\'"](.*?)[\'"];/i', $content, $dateMatch);
+                    
+                    $title = $titleMatch[1] ?? 'Untitled Post';
+                    // Strip the " | Dr. Anvesh Dharanikota" part if present for cleaner cards
+                    $title = explode('|', $title)[0];
+
+                    // A post dated in the future stays off the list until its day arrives.
+                    $postDate = $dateMatch[1] ?? date('Y-m-d', filectime($file));
+                    if ($postDate > date('Y-m-d')) continue;
+
+                    $img = $imgMatch[1] ?? '/photos/logo-anvesh.jpg';
+                    $img = str_replace('https://dranveshdharanikota.com', '', $img);
+
+                    $blogs[] = [
+                        'title' => trim($title),
+                        'image' => $img,
+                        'date'  => $postDate,
+                        'url'   => '/blog/' . basename($file, '.php')
+                    ];
+                }
+                
+                // Sort blogs by date, newest first
+                usort($blogs, function($a, $b) {
+                    return strtotime($b['date']) - strtotime($a['date']);
+                });
                 
                 foreach($blogs as $blog) {
+                  $formatted_date = date('F j, Y', strtotime($blog['date']));
                   echo '
-                  <a href="#" class="blog-card" data-reveal>
-                    <img src="'.$blog['image'].'" alt="'.htmlspecialchars($blog['title']).'" class="blog-card__image" loading="lazy">
+                  <a href="'.htmlspecialchars($blog['url']).'" class="blog-card" data-reveal>
+                    <img src="'.htmlspecialchars($blog['image']).'" alt="'.htmlspecialchars($blog['title']).'" class="blog-card__image" loading="lazy">
                     <div class="blog-card__content">
+                      <div class="blog-card__date">'.$formatted_date.'</div>
                       <h3 class="blog-card__title">'.htmlspecialchars($blog['title']).'</h3>
                       <span class="blog-card__read-more">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></span>
                     </div>
                   </a>';
+                }
+                
+                if (empty($blogs)) {
+                    echo '<div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: #64748b;">
+                            <p>No blog posts published yet. Check back soon!</p>
+                          </div>';
                 }
                 ?>
               </div>
             </div>
           </section>
         </div>
-<?php require __DIR__ . '/footer.php'; ?>
+<?php require dirname(__DIR__) . '/footer.php'; ?>

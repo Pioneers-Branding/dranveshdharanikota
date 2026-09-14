@@ -1,5 +1,6 @@
 import os
 import glob
+import re
 from datetime import datetime
 
 directory = r"c:\Users\GCV\Desktop\Dr Anvesh"
@@ -8,7 +9,7 @@ domain = "https://dranveshdharanikota.com"
 # Exclude list (shared includes and non-pages)
 exclude_files = [
     "header.php", "footer.php", "header-include.php", "icons.php",
-    "router.php", "server-check.php", "404.php"
+    "router.php", "server-check.php", "404.php", "blog-parts.php"
 ]
 
 php_files = glob.glob(os.path.join(directory, "**", "*.php"), recursive=True)
@@ -27,15 +28,26 @@ for filepath in php_files:
     if rel_path == "index.php":
         url_path = "/"
         priority = "1.0"
+    elif rel_path.endswith("index.php"):
+        url_path = f"/{rel_path[:-10]}"
+        priority = "0.9"
     else:
         url_path = f"/{rel_path[:-4]}"
         priority = "0.8"
         
-    if "services/" in url_path or "techniques/" in url_path:
+    if "services/" in url_path or "techniques/" in url_path or "blog/" in url_path:
         priority = "0.9"
 
+    # Blog posts carry their publication date in $date; use it as lastmod.
+    lastmod = ""
+    if url_path.startswith("/blog/"):
+        with open(filepath, encoding="utf-8") as f:
+            match = re.search(r"\$date\s*=\s*'(\d{4}-\d{2}-\d{2})';", f.read())
+        if match:
+            lastmod = f"\n    <lastmod>{match.group(1)}</lastmod>"
+
     sitemap_urls.append(f"""  <url>
-    <loc>{domain}{url_path}</loc>
+    <loc>{domain}{url_path}</loc>{lastmod}
     <changefreq>monthly</changefreq>
     <priority>{priority}</priority>
   </url>""")

@@ -101,34 +101,6 @@ if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
           </div>
         </div>
       </footer>
-<?php if ($show_chat): ?>
-      <div class="chat-widget" data-float-widget>
-        <div class="chat-panel" data-float-panel hidden>
-          <div class="split-row split-row--top">
-            <div class="inline-row inline-row--default">
-              <div class="icon-tile icon-tile--round">
-                <svg class="icon icon--md icon--on-dark" aria-hidden="true"><use href="#i-message-circle"></use></svg>
-              </div>
-              <div>
-                <h4 class="strong-label">Dr. Dharanikota</h4>
-                <p class="text">Surgical Oncologist</p>
-              </div>
-            </div>
-            <button type="button" class="chat-panel__close" data-float-close aria-label="Close chat panel"><svg class="icon icon--default" aria-hidden="true"><use href="#i-x"></use></svg></button>
-          </div>
-          <p class="chat-panel__text">Hi! I'm available to answer your questions about cancer treatment and surgical procedures. How can I help you today?</p>
-          <button type="button" data-whatsapp data-whatsapp class="btn btn--primary btn--block">
-            <svg class="icon icon--default" aria-hidden="true"><use href="#i-message-circle"></use></svg>
-            <span>Start Conversation</span>
-          </button>
-        </div>
-        <button type="button" data-float-toggle aria-expanded="false" aria-label="Open chat panel" class="chat-fab">
-          <span data-icon="chat"><svg class="icon icon--lg" aria-hidden="true"><use href="#i-message-circle"></use></svg></span><span data-icon="close" hidden><svg class="icon icon--lg" aria-hidden="true"><use href="#i-x"></use></svg></span>
-          <div class="chat-fab__pulse"></div>
-          <div class="chat-fab__badge" data-float-badge><span class="chat-fab__badge-text">1</span></div>
-        </button>
-      </div>
-<?php endif; ?>
     </div>
     <script src="<?= e(asset('/js/main.js')) ?>" defer></script>
     <script defer src="https://app.wacrs.com/install-widget/bundle.js?key=5c9e8087-94d7-41ee-958e-bc9a1a013c26"></script>

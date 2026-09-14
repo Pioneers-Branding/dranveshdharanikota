@@ -33,7 +33,7 @@ if (preg_match('~^(.*)\.php$~', $path, $m)) {
 }
 
 // The shared includes are not pages. The live server blocks these too.
-if (preg_match('~^/(header|footer|header-include|icons|router)/?$~', $path)) {
+if (preg_match('~^/(header|footer|header-include|icons|router|blog-parts)/?$~', $path)) {
     http_response_code(404);
     require __DIR__ . '/404.php';
     return true;
@@ -49,6 +49,12 @@ $file = __DIR__ . $page . '.php';
 
 if (is_file($file)) {
     require $file;
+    return true;
+}
+
+$dir_index = rtrim(__DIR__ . $path, '/') . '/index.php';
+if (is_file($dir_index)) {
+    require $dir_index;
     return true;
 }
 

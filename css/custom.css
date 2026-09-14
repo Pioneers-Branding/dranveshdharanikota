@@ -57,3 +57,361 @@
   width: 100%;
   border: 0;
 }
+
+/* Blog posts ---------------------------------------------------------------
+ *
+ * The article layout for the pages in blog/. The markup comes from
+ * blog-parts.php (hero, images, call-to-action box, FAQ, author box, notes)
+ * and from the post files themselves (.blog-answer and .blog-prose).
+ *
+ * style.css resets headings, lists and links to plain text, as Tailwind's
+ * base layer does, so the long-form typography is set out in full here.
+ */
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.875rem;
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: #e2e8f0;
+}
+
+.blog-meta__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid rgb(255 255 255 / 0.6);
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+.blog-meta__dot {
+  opacity: 0.6;
+}
+
+.blog-article {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.blog-prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.blog-prose h2 {
+  margin-top: 2.75rem;
+  font-size: 1.75rem;
+  line-height: 1.3;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.blog-prose h3 {
+  margin-top: 2rem;
+  font-size: 1.3125rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.blog-prose h2 + *,
+.blog-prose h3 + * {
+  margin-top: 0.75rem;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  padding-left: 1.5rem;
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li + li {
+  margin-top: 0.5rem;
+}
+
+.blog-prose li::marker {
+  color: #80060a;
+}
+
+.blog-prose strong {
+  color: #0f172a;
+}
+
+.blog-prose a:not([class]) {
+  font-weight: 600;
+  color: #80060a;
+  text-decoration: underline;
+  text-decoration-color: rgb(128 6 10 / 0.35);
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:not([class]):hover {
+  text-decoration-color: currentColor;
+}
+
+.blog-table {
+  overflow-x: auto;
+}
+
+.blog-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.blog-table th,
+.blog-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-table th {
+  background-color: #f0f4ff;
+  font-weight: 700;
+  color: #00245a;
+}
+
+.blog-table tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+.blog-figure {
+  margin: 2rem 0;
+}
+
+.blog-figure--featured {
+  margin-top: 0;
+}
+
+.blog-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.25);
+}
+
+.blog-figure figcaption {
+  margin-top: 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: center;
+  color: #64748b;
+}
+
+.blog-answer {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid #80060a;
+  border-radius: 0.75rem;
+  background-color: #fdf2f2;
+}
+
+.blog-answer__label {
+  margin-bottom: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #80060a;
+}
+
+.blog-cta {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background-image: linear-gradient(135deg, #80060a, #00245a);
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.blog-cta__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fecaca;
+}
+
+.blog-prose .blog-cta__title {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  font-weight: 800;
+  color: #fff;
+}
+
+.blog-prose .blog-cta__text {
+  max-width: 40rem;
+  margin: 0.75rem auto 0;
+  color: #e2e8f0;
+}
+
+.blog-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.blog-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 1.5rem;
+  border: 2px solid #fff;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.blog-cta__btn:hover {
+  transform: translateY(-2px);
+}
+
+.blog-cta__btn--light {
+  background-color: #fff;
+  color: #80060a;
+}
+
+.blog-cta__btn--outline {
+  background-color: transparent;
+  color: #fff;
+}
+
+.blog-cta__btn--outline:hover {
+  background-color: rgb(255 255 255 / 0.12);
+}
+
+.blog-prose .blog-cta__hours {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+}
+
+.blog-faq {
+  margin-top: 3.5rem;
+}
+
+.blog-faq__title {
+  margin-bottom: 1.25rem;
+  font-size: 1.75rem;
+  line-height: 1.3;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.blog-author {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background-image: linear-gradient(135deg, #fdf2f2, #f0f4ff);
+}
+
+.blog-author__photo {
+  flex: none;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 3px solid #fff;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.blog-author__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #80060a;
+}
+
+.blog-author__name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.blog-author__role {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #00245a;
+}
+
+.blog-author__bio {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.blog-author__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #80060a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-note {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.blog-note p + p {
+  margin-top: 0.5rem;
+}
+
+.blog-note a {
+  color: #475569;
+  text-decoration: underline;
+}
+
+@media (max-width: 575px) {
+  .blog-article {
+    font-size: 1rem;
+  }
+
+  .blog-prose h2,
+  .blog-faq__title {
+    font-size: 1.5rem;
+  }
+
+  .blog-cta {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .blog-cta__btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .blog-author {
+    flex-direction: column;
+  }
+}

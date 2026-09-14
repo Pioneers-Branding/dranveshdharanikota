@@ -86,7 +86,7 @@ RewriteRule ^$ index.php [L]
 # would happily serve header.php for /header. They also refuse a direct request
 # in PHP, but that guard cannot fire on a server that hands the request to a
 # different script, so block the address here as well.
-RewriteRule ^(header|footer|header-include|icons|router)/?$ /404.php [L]
+RewriteRule ^(header|footer|header-include|icons|router|blog-parts)/?$ /404.php [L]
 
 # The rule that matters: serve <route>.php for the clean URL, without
 # redirecting, so /contact stays /contact in the address bar.
@@ -95,8 +95,9 @@ RewriteRule ^(header|footer|header-include|icons|router)/?$ /404.php [L]
 # OpenLiteSpeed, REQUEST_FILENAME can still be unresolved while a request is
 # being rewritten below an existing directory, so the generic -f check below
 # may never see services/foo.php even when that file exists.
+RewriteRule ^blog/?$ blog/index.php [L]
 RewriteCond %{REQUEST_URI} !\.php$ [NC]
-RewriteRule ^(services|techniques)/([^/]+)/?$ $1/$2.php [L]
+RewriteRule ^(services|techniques|blog)/([^/]+)/?$ $1/$2.php [L]
 
 # There is deliberately no !-d guard: /services and /techniques are real
 # directories that still have to resolve to services.php and techniques.php.
@@ -146,7 +147,7 @@ ErrorDocument 404 /404.php
 #
 # Both spellings are wrapped, so a server with neither module does nothing here
 # rather than failing every page with a 500.
-<FilesMatch "^(header|footer|header-include|icons|router)\.php$">
+<FilesMatch "^(header|footer|header-include|icons|router|blog-parts)\.php$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
