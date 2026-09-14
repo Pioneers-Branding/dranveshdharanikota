@@ -247,6 +247,9 @@ ob_start();
                 </div>
               </div>
               <div class="relative-box group">
+                <a class="nav-link nav-link--default" href="/blog">Blog</a>
+              </div>
+              <div class="relative-box group">
                 <a class="nav-link nav-link--default" href="/contact">Contact</a>
               </div>
             </nav>
@@ -289,6 +292,9 @@ ob_start();
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/testimonials">Testimonials</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/gallery">Gallery</a>
               <a class="mobile-nav__sublink mobile-nav__sublink--default" href="/faqs">FAQs</a>
+            </div>
+            <div class="stack stack--xs">
+              <a class="mobile-nav__link mobile-nav__link--default" href="/blog">Blog</a>
             </div>
             <div class="stack stack--xs">
               <a class="mobile-nav__link mobile-nav__link--default" href="/contact">Contact</a>

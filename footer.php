@@ -51,6 +51,7 @@ if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
                 <li><a class="footer-link" href="/publications">Research &amp; Publications</a></li>
                 <li><a class="footer-link" href="/testimonials">Patient Testimonials</a></li>
                 <li><a class="footer-link" href="/contact">Contact &amp; Location</a></li>
+                <li><a class="footer-link" href="/blog">Our Blog</a></li>
               </ul>
             </div>
             <div class="stack stack--lg">
