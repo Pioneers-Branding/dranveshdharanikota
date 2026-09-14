@@ -131,5 +131,6 @@ if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'] ?? '')) {
 <?php endif; ?>
     </div>
     <script src="<?= e(asset('/js/main.js')) ?>" defer></script>
+    <script defer src="https://app.wacrs.com/install-widget/bundle.js?key=5c9e8087-94d7-41ee-958e-bc9a1a013c26"></script>
   </body>
 </html>
