@@ -5,7 +5,7 @@ $description    = 'Read the latest articles, insights, and news on surgical onco
 $og_title       = 'Blog of Dr. Anvesh Dharanikota';
 $og_description = 'Latest insights on surgical oncology, cancer care, and minimally invasive surgeries.';
 
-require dirname(__DIR__) . '/header.php';
+require __DIR__ . '/header.php';
 ?>
         <div class="page page--default">
           <div style="background: linear-gradient(to right, rgb(114, 5, 9), rgb(0, 32, 80))">
@@ -99,9 +99,8 @@ require dirname(__DIR__) . '/header.php';
               <div class="blog-grid">
                 <?php 
                 $blogs = [];
-                // Read all php files in this directory except index.php
-                foreach (glob(__DIR__ . '/*.php') as $file) {
-                    if (basename($file) === 'index.php') continue;
+                // Read all php files in the blog directory
+                foreach (glob(__DIR__ . '/blog/*.php') as $file) {
                     
                     $content = file_get_contents($file);
                     
@@ -157,4 +156,4 @@ require dirname(__DIR__) . '/header.php';
             </div>
           </section>
         </div>
-<?php require dirname(__DIR__) . '/footer.php'; ?>
+<?php require __DIR__ . '/footer.php'; ?>

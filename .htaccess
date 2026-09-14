@@ -95,7 +95,6 @@ RewriteRule ^(header|footer|header-include|icons|router|blog-parts)/?$ /404.php 
 # OpenLiteSpeed, REQUEST_FILENAME can still be unresolved while a request is
 # being rewritten below an existing directory, so the generic -f check below
 # may never see services/foo.php even when that file exists.
-RewriteRule ^blog/?$ blog/index.php [L]
 RewriteCond %{REQUEST_URI} !\.php$ [NC]
 RewriteRule ^(services|techniques|blog)/([^/]+)/?$ $1/$2.php [L]
 
